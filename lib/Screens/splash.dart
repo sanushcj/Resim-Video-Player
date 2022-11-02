@@ -5,10 +5,15 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:resimvideoplayer/DB/videodata.dart';
+import '../DB/videodata.dart';
 
 import '../navbar.dart';
 
+List <String> VideoTitles = [];
+List <String>  VideoSize = [];
+List <dynamic> VideoPath = [];
+List <String> VideoDuration = [];
+Set  <String>  Videofolders = {};
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
 
@@ -29,7 +34,7 @@ class _SplashscreenState extends State<Splashscreen> {
   }
   @override
   Widget build(BuildContext context) {
- GoToHome(context);
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),
       body: Center(
@@ -56,7 +61,7 @@ class _SplashscreenState extends State<Splashscreen> {
       const Duration(seconds: 2),
     );
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const NavBar(),
+      builder: (context) =>  const NavBar(),
     ));
   }
 
@@ -89,7 +94,7 @@ class _SplashscreenState extends State<Splashscreen> {
       return true;
     } else {
       final PermissionStatus result = await store.request();
-      final PermissionStatus oneresult = await access.request();
+      final PermissionStatus oneresult = await access.request(); 
 
       if (result == PermissionStatus.limited &&
           oneresult == PermissionStatus.limited) {
@@ -102,12 +107,28 @@ class _SplashscreenState extends State<Splashscreen> {
 
   
   
-   Future<void> onSuccess(String audioListFromStorage) async {
-    final dynamic valueMap = jsonDecode(audioListFromStorage);
+   Future<void> onSuccess(String VideosDatass) async {
+    final dynamic valueMap = jsonDecode(VideosDatass);
     final List<dynamic> Videolist = valueMap as List<dynamic>;
-   dynamic Videolist2 = Videolist.map((dynamic e) {
+
+   final Videolist2 = Videolist.map((dynamic e) {
+    
+    // Videofiless = Videolist2 ;
       return VideoListData.fromJson(e as Map<String, dynamic>);
     }).toList();
-   log('${Videolist2}');
+    log('Function Working');
+     GoToHome(context);
+   
+
+   // ignore: unnecessary_brace_in_string_interps
+   log('${Videolist2[2].path}');
+   Videofolders = Videolist2.map((e) => e.folderName.toString()).toList().toSet();
+   VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
+   VideoPath = Videolist2.map((e) => e.path.toString()).toList();
+   VideoSize = Videolist2.map((e) => e.size.toString()).toList();
+   VideoDuration = Videolist2.map((e) => e.duration.toString()).toList();
+   log('$VideoTitles');
+   
+// print(Videofiless);
 }
 }

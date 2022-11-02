@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/thumbnail_container.dart';
 import 'search.dart';
 import 'settings.dart';
+import 'splash.dart';
 
 class AllVideos extends StatelessWidget {
   const AllVideos({super.key});
@@ -44,9 +46,11 @@ class AllVideos extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 129.w, top: 20.h),
                     child: IconButton(
-                        onPressed: () { Navigator.of(context).push(MaterialPageRoute(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => SearchPage(),
-                          ));},
+                          ));
+                        },
                         icon: Icon(
                           Icons.search,
                           color: Colors.white,
@@ -114,17 +118,20 @@ class AllVideos extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                      BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height / 1.3,
-              // child: Column(
-              //   children: [
-
-              //   ],
-              // ),
-            )
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(30))),
+                height: MediaQuery.of(context).size.height / 1.3,
+                child: ListView.separated(
+                  physics:  BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(VideoTitles[index]),
+                    leading: Thumbnail(),
+                  ),
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: VideoTitles.length,
+                )),
           ],
         ),
       ),

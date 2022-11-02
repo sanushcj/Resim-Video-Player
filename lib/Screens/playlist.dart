@@ -56,7 +56,7 @@ class PlaylistPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 97.w, top: 20.h),
+                    padding: EdgeInsets.only(left: 150.w, top: 20.h),
                     child: IconButton(
                         onPressed: () {},
                         icon: Icon(
@@ -130,9 +130,9 @@ class PlaylistPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.4 ,
+              height: MediaQuery.of(context).size.height/1.311 ,
               width: MediaQuery.of(context).size.width,
-              child: Column(
+              child: ListView(
                 children: [
                   SizedBox(
                     height: 10,
@@ -164,7 +164,7 @@ class PlaylistPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                     height: MediaQuery.of(context).size.height / 1.257,
+                     height: MediaQuery.of(context).size.height / 1.425,
                     child: GridView.builder(
                       itemCount: 10,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),

@@ -1,5 +1,6 @@
 // ignore_for_file: always_specify_types
 
+
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'Screens/allvideos.dart';
@@ -8,7 +9,7 @@ import 'Screens/my.dart';
 import 'Screens/playlist.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+   const NavBar({super.key, });
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -18,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   int _currentselectionIndex = 0;
 
   final List<Widget> _pages = [
-     HomeScreen(),
+     const HomeScreen(),
     const AllVideos(),
     const UserFav(),
     PlaylistPage(),
@@ -26,6 +27,7 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
+        // log('<<<<<<<<<<<<<<<<<<<<<ssss<<<<<<<<<<<<<<<<<<<<<<<<<<,${widget.videodatasss}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.');
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),

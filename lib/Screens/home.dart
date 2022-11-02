@@ -1,14 +1,17 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
 
-import 'package:file_picker/file_picker.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'allvideos.dart';
 import 'search.dart';
 import 'settings.dart';
+import 'splash.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+   const HomeScreen({super.key, });
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -36,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ];
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),
       body: SafeArea(
@@ -151,15 +155,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
+                  // onTap: () => ,
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,
                   ),
-                  // title: Text(namess[index]),
+                   title: Text(Videofolders.elementAt(index)),
+                  
                 ),
                 separatorBuilder: (context, index) => Divider(),
-                // itemCount: namess.length,
-                itemCount: 10,
+                itemCount: Videofolders.length,
+               
               ),
             ),
           ],
