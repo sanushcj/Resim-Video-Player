@@ -124,8 +124,10 @@ class AllVideos extends StatelessWidget {
                         BorderRadius.only(topLeft: Radius.circular(30))),
                 height: MediaQuery.of(context).size.height / 1.3,
                 child: ListView.separated(
+                  padding: EdgeInsets.only(top: 15),
                   physics:  BouncingScrollPhysics(),
                   itemBuilder: (context, index) => ListTile(
+                    // onTap: () => ,
                     title: Text(VideoTitles[index]),
                     leading: Thumbnail(),
                   ),

@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'allvideos.dart';
+import 'all_videos.dart';
 import 'search.dart';
 import 'settings.dart';
 import 'splash.dart';

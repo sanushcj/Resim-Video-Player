@@ -9,7 +9,7 @@ class Thumbnail extends StatelessWidget {
     return Container(
       width: 65,
       height: 50,
-      color: Color.fromARGB(255, 0, 100, 100),
+      color: const Color.fromARGB(255, 0, 100, 100),
       child: Column(
 
       ),

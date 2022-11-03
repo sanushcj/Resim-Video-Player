@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
+import 'package:hive_flutter/adapters.dart';
 
 import 'Screens/splash.dart';
 
-void main() {
-
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -22,12 +22,13 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         // ignore: always_specify_types
         builder: (context, child) {
-          return  MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(backgroundColor: const Color.fromARGB(255, 4, 57, 87),fontFamily: 'Resim'),
+            theme: ThemeData(
+                backgroundColor: const Color.fromARGB(255, 4, 57, 87),
+                fontFamily: 'Resim'),
             title: 'Resim Video',
             home: const Splashscreen(),
-            
           );
         });
   }

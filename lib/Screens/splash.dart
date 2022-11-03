@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../DB/modelclass.dart';
 import '../DB/videodata.dart';
 
 import '../navbar.dart';
@@ -14,6 +15,10 @@ List <String>  VideoSize = [];
 List <dynamic> VideoPath = [];
 List <String> VideoDuration = [];
 Set  <String>  Videofolders = {};
+
+var allvideos = [];
+dynamic  datadata;
+
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
 
@@ -112,14 +117,16 @@ class _SplashscreenState extends State<Splashscreen> {
     final List<dynamic> Videolist = valueMap as List<dynamic>;
 
    final Videolist2 = Videolist.map((dynamic e) {
+  
     
     // Videofiless = Videolist2 ;
       return VideoListData.fromJson(e as Map<String, dynamic>);
     }).toList();
     log('Function Working');
      GoToHome(context);
-   
-
+     allvideos = Videolist2.map((e) => VideoDatass(title: e.title!, folderName: e.folderName!, size: e.size!, duration: e.duration.toString(), path: e.path!)).toList();
+datadata = allvideos;
+log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${datadata[1]}>>>>>>>>>>>>>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>>>>>>');
    // ignore: unnecessary_brace_in_string_interps
    log('${Videolist2[2].path}');
    Videofolders = Videolist2.map((e) => e.folderName.toString()).toList().toSet();
@@ -127,7 +134,7 @@ class _SplashscreenState extends State<Splashscreen> {
    VideoPath = Videolist2.map((e) => e.path.toString()).toList();
    VideoSize = Videolist2.map((e) => e.size.toString()).toList();
    VideoDuration = Videolist2.map((e) => e.duration.toString()).toList();
-   log('$VideoTitles');
+  //  log('$VideoTitles');
    
 // print(Videofiless);
 }

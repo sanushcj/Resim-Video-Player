@@ -7,7 +7,7 @@ class VideoListData {
       this.folderName,
       this.id,
       this.path,
-      this.title});
+      this.title,});
 
   VideoListData.fromJson(Map<String, dynamic> json) {
     size = json['Size'] as String;

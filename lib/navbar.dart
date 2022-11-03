@@ -3,7 +3,7 @@
 
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'Screens/allvideos.dart';
+import 'Screens/all_videos.dart';
 import 'Screens/home.dart';
 import 'Screens/my.dart';
 import 'Screens/playlist.dart';
