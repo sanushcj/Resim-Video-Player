@@ -29,6 +29,9 @@ class VideoDatass {
 }
 String boxname = 'Videos';
 
+
+
+// ignore: avoid_classes_with_only_static_members
 class StorageBox {
   static Box<List<dynamic>>? _box;
   static Box<List<dynamic>> getInstance() {

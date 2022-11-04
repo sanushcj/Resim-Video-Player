@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import 'DB/modelclass.dart';
 import 'Screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+
+     Hive.registerAdapter(VideoDatassAdapter());
+  
+ 
+ await Hive.openBox<List<dynamic>>(boxname);
+
+
   runApp(const MyApp());
 }
 

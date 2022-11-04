@@ -12,7 +12,7 @@ import '../navbar.dart';
 
 List <String> VideoTitles = [];
 List <String>  VideoSize = [];
-List <dynamic> VideoPath = [];
+List <String> VideoPath = [];
 List <String> VideoDuration = [];
 Set  <String>  Videofolders = {};
 
@@ -125,8 +125,9 @@ class _SplashscreenState extends State<Splashscreen> {
     log('Function Working');
      GoToHome(context);
      allvideos = Videolist2.map((e) => VideoDatass(title: e.title!, folderName: e.folderName!, size: e.size!, duration: e.duration.toString(), path: e.path!)).toList();
+     
 datadata = allvideos;
-log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${datadata[1]}>>>>>>>>>>>>>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>>>>>>');
+log('$datadata');
    // ignore: unnecessary_brace_in_string_interps
    log('${Videolist2[2].path}');
    Videofolders = Videolist2.map((e) => e.folderName.toString()).toList().toSet();

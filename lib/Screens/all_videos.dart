@@ -1,11 +1,15 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
 
+import 'dart:developer';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/thumbnail_container.dart';
 import 'search.dart';
 import 'settings.dart';
 import 'splash.dart';
+import 'videoplaying screen/video_playing_screen.dart';
 
 class AllVideos extends StatelessWidget {
   const AllVideos({super.key});
@@ -125,12 +129,24 @@ class AllVideos extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 1.3,
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 15),
-                  physics:  BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => ListTile(
-                    // onTap: () => ,
-                    title: Text(VideoTitles[index]),
-                    leading: Thumbnail(),
-                  ),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    log('message');
+                    return ListTile(
+                      // onTap:() {
+                      //   return log('Inside print');
+                      //   //
+                      // },
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => VideoPlayingScreen(
+                              ),
+                        ),
+                      ),
+                      title: Text(VideoTitles[index]),
+                      leading: Thumbnail(),
+                    );
+                  },
                   separatorBuilder: (context, index) => Divider(),
                   itemCount: VideoTitles.length,
                 )),
