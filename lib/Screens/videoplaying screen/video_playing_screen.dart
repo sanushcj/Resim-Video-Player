@@ -92,10 +92,16 @@
 
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 class VideoPlayingScreen extends StatefulWidget {
+   VideoPlayingScreen({super.key, required this.VideoFetched });
+
+String VideoFetched;
+
+  
   @override
   VideoPlayingScreenState createState() => VideoPlayingScreenState();
 }
@@ -106,15 +112,17 @@ class VideoPlayingScreenState extends State<VideoPlayingScreen> {
 
   @override
   void initState() {
-    super.initState();
+    
 
     _videoPlayerController =
-        VideoPlayerController.asset('assets/video/sample.mp4');
+        VideoPlayerController.file(File(widget.VideoFetched));
     _videoPlayerController.addListener(() {
       if (startedPlaying && !_videoPlayerController.value.isPlaying) {
-        Navigator.pop(context);
+        // Navigator.pop(context);
       }
     });
+    log('$_videoPlayerController this is video');
+    super.initState();
   }
 
   @override

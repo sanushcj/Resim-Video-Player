@@ -139,7 +139,7 @@ class AllVideos extends StatelessWidget {
                       // },
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => VideoPlayingScreen(
+                          builder: (_) => VideoPlayingScreen(VideoFetched: VideoPath[index],
                               ),
                         ),
                       ),
