@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
      const HomeScreen(),
-    const AllVideos(),
+     const AllVideos(),
     const UserFav(),
     PlaylistPage(),
   ];

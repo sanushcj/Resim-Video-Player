@@ -5,6 +5,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/bottomsheet.dart';
 import '../widgets/thumbnail_container.dart';
 import 'search.dart';
 import 'settings.dart';
@@ -12,8 +13,8 @@ import 'splash.dart';
 import 'videoplaying screen/video_playing_screen.dart';
 
 class AllVideos extends StatelessWidget {
-  const AllVideos({super.key});
-
+   const AllVideos({super.key});
+// SortFunctions functionnn = SortFunctions();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,7 +49,7 @@ class AllVideos extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 129.w, top: 20.h),
+                    padding: EdgeInsets.only(left: 85.w, top: 20.h),
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
@@ -59,6 +60,10 @@ class AllVideos extends StatelessWidget {
                           Icons.search,
                           color: Colors.white,
                         )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 0.w, top: 20.h),
+                    child: IconButton(onPressed: (){}, icon: Icon(Icons.import_export),color: Colors.white,),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20, left: 0.w),
@@ -102,7 +107,7 @@ class AllVideos extends StatelessWidget {
                             children: [
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.chrome_reader_mode),
+                                icon: Icon(Icons.chrome_reader_mode),   
                               ),
                               SizedBox(
                                 // sized box with width 10
@@ -131,24 +136,32 @@ class AllVideos extends StatelessWidget {
                   padding: EdgeInsets.only(top: 15),
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
+ // functionnn.assendingorder();
+                    // abc.sort((a, b) => a.length.compareTo(b.length));
+                    // log('$abc after sorting');
+
+//  fullvideo.sort((a, b) => a.length.compareTo(b.length));
+
+
                     log('message');
                     return ListTile(
                       // onTap:() {
                       //   return log('Inside print');
                       //   //
                       // },
+                      onLongPress: () => showCustomBottomSheet(context,index),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => VideoPlayingScreen(VideoFetched: VideoPath[index],
-                              ),
+                          builder: (_) => VideoPlayingScreen(VideoFetched: fullvideo[index].path.toString(), 
+                              ), 
                         ),
                       ),
-                      title: Text(VideoTitles[index]),
+                       title: Text(fullvideo[index].title.toString()),
                       leading: Thumbnail(),
                     );
                   },
                   separatorBuilder: (context, index) => Divider(),
-                  itemCount: VideoTitles.length,
+                  itemCount: fullvideo.length,
                 )),
           ],
         ),

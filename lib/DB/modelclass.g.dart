@@ -12,6 +12,7 @@ class VideoDatassAdapter extends TypeAdapter<VideoDatass> {
 
   @override
   VideoDatass read(BinaryReader reader) {
+    // ignore: always_specify_types
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
