@@ -130,7 +130,7 @@ class PlaylistPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.311 ,
+              height: MediaQuery.of(context).size.height/1.325 ,
               width: MediaQuery.of(context).size.width,
               child: ListView(
                 children: [
@@ -164,7 +164,7 @@ class PlaylistPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                     height: MediaQuery.of(context).size.height / 1.425,
+                     height: MediaQuery.of(context).size.height / 1.325,
                     child: GridView.builder(
                       itemCount: 10,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),

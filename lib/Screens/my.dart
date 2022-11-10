@@ -117,7 +117,7 @@ class UserFav extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.3,
+              height: MediaQuery.of(context).size.height/1.325,
               
             )
           ],

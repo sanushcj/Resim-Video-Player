@@ -57,7 +57,7 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                   onPressed: () => Navigator.pop(ctx),
+                    onPressed: () => Navigator.pop(ctx),
                     icon: Icon(
                       Icons.share_outlined,
                       color: Color.fromARGB(223, 0, 0, 0),
@@ -66,7 +66,7 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
                         style: TextStyle(color: Colors.black, fontSize: 16))),
                 // ElevatedButton(
                 //   child: const Text('Close BottomSheet'),
-                //   
+                //
                 // ),
               ],
             ),

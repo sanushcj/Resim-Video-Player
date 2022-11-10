@@ -29,11 +29,10 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  appinio_video_player: ^1.2.0
   cupertino_icons: ^1.0.2
   dependencies: null
   file_manager: ^1.0.1
-  # file_picker: ^5.2.2
-  # file_picker_cross: ^4.6.0
   file_picker: ^5.2.2
   floating_bottom_navigation_bar: ^1.5.2
   flutter:
@@ -42,7 +41,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   permission_handler: ^10.2.0
-  video_player: ^2.4.7
+  video_thumbnail: ^0.5.3
 
 dev_dependencies:
   build_runner: ^2.3.2

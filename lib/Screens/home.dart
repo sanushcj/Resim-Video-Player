@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'all_videos.dart';
@@ -22,19 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     AllVideos();
   }
 
-  // List<String> namess = [
-  //   'Camera',
-  //   'DCIM',
-  //   'Videos',
-  //   'Movies',
-  //   'CBSE SLEEPING',
-  //   'Short Filims',
-  //   'Ajo Varghese Videos',
-  //   'Infopark',
-  //   'Abin K Ruby Videos',
-  //   'Wedding',
-  //   'Devotional Videos'
-  // ];
   @override
   Widget build(BuildContext context) {
 
@@ -148,17 +134,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height / 1.3,
+              height: MediaQuery.of(context).size.height / 1.325,
               child: ListView.separated(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
-                  // onTap: () => ,
+                  onTap: () => fullvideo[index].path ,
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,
                   ),
-                   title: Text(Videofolders.elementAt(index)),
+                   title: Text(fullvideo[index].folderName),
                   
                 ),
                 separatorBuilder: (context, index) => Divider(),

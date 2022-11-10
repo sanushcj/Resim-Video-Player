@@ -89,17 +89,16 @@
 //       ..initialize().then((void value) => _controller.play());
 //   }
 // }
-
-
-import 'dart:developer';
 import 'dart:io';
-
+import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+
 class VideoPlayingScreen extends StatefulWidget {
-   VideoPlayingScreen({super.key, required this.VideoFetched });
+   VideoPlayingScreen({super.key, required this.VideoFetched, required this.VTitle });
 
 String VideoFetched;
+String VTitle;
 
   
   @override
@@ -107,55 +106,35 @@ String VideoFetched;
 }
 
 class VideoPlayingScreenState extends State<VideoPlayingScreen> {
-  late VideoPlayerController _videoPlayerController;
+  late VideoPlayerController videoPlayerController;
+  late CustomVideoPlayerController _customVideoPlayerController;
+  
   bool startedPlaying = false;
 
   @override
   void initState() {
-    
-
-    _videoPlayerController =
-        VideoPlayerController.file(File(widget.VideoFetched));
-    _videoPlayerController.addListener(() {
-      if (startedPlaying && !_videoPlayerController.value.isPlaying) {
-        // Navigator.pop(context);
-      }
-    });
-    log('$_videoPlayerController this is video');
     super.initState();
+    videoPlayerController = VideoPlayerController.file(File(widget.VideoFetched))
+      ..initialize().then((value) => setState(() {}));
+    _customVideoPlayerController = CustomVideoPlayerController(
+      context: context,
+      videoPlayerController: videoPlayerController,
+    );
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
+    _customVideoPlayerController.dispose();
     super.dispose();
-  }
-
-  Future<bool> started() async {
-    await _videoPlayerController.initialize();
-    await _videoPlayerController.play();
-    startedPlaying = true;
-    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
-        child: FutureBuilder<bool>(
-          future: started(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            log('$snapshot');
-            if (snapshot.data ?? false) {
-              return AspectRatio(
-                aspectRatio: _videoPlayerController.value.aspectRatio,
-                child: VideoPlayer(_videoPlayerController),
-              );
-            } else {
-              return const Text('waiting for video to load');
-            }
-          },
-        ),
+     return Scaffold(
+      body: CustomVideoPlayer(
+        customVideoPlayerController: _customVideoPlayerController
+        
+      
       ),
     );
   }
