@@ -152,7 +152,7 @@ class AllVideos extends StatelessWidget {
                       onLongPress: () => showCustomBottomSheet(context,index),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => VideoPlayingScreen(VideoFetched: fullvideo[index].path.toString(), VTitle:(fullvideo[index].title.toString()), 
+                          builder: (_) => VideoPlayer(VideoFetched: fullvideo[index].path.toString(), VTitle:(fullvideo[index].title.toString()), 
                               ), 
                         ),
                       ),
