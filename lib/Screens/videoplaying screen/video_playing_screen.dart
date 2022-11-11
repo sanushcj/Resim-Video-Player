@@ -67,7 +67,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
           color: Colors.green,
           child: videoPlayerController.value.isInitialized
               ? Stack(
-                  alignment: Alignment.center,
+                  // alignment: Alignment.center,
                   children: [
                     Container(
                         height: MediaQuery.of(context).size.height,
@@ -78,11 +78,39 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                           aspectRatio: videoPlayerController.value.aspectRatio,
                           child: VideoPlayer(videoPlayerController),
                         )),
+                    Container(
+                      width: double.infinity,
+                      height: 70,
+                      color: Color.fromARGB(100, 0, 0, 0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                              onPressed: (() {}),
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              )),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            widget.VTitle,
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),SizedBox(width: 10,),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                              ))
+                        ],
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         height: 120,
-                        color: Color.fromARGB(72, 0, 0, 0),
+                        color: Color.fromARGB(100, 0, 0, 0),
                         child: Column(
                           children: [
                             Row(
@@ -99,23 +127,20 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                   }),
                                 ),
                                 Expanded(
-                                  child: ClipRRect(
-borderRadius: BorderRadius.circular(6),
-                                    child: SizedBox(
-                                      height: 20,
-                                      child: VideoProgressIndicator(
-                                          videoPlayerController,
-                                          colors: VideoProgressColors(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 255, 255, 255),
-                                              playedColor: Colors.red,
-                                              bufferedColor: Colors.black),
-                                          allowScrubbing: true,
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 50,
-                                            horizontal: 50,
-                                          )),
-                                    ),
+                                  child: Container(
+                                    height: 40,
+                                    child: VideoProgressIndicator(
+                                        videoPlayerController,
+                                        colors: VideoProgressColors(
+                                            backgroundColor: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                            playedColor: Colors.red,
+                                            bufferedColor: Colors.black),
+                                        allowScrubbing: true,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15,
+                                          horizontal: 15,
+                                        )),
                                   ),
                                 ),
                                 Text(
@@ -126,7 +151,6 @@ borderRadius: BorderRadius.circular(6),
                                 )
                               ],
                             ),
-                          
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -135,14 +159,14 @@ borderRadius: BorderRadius.circular(6),
                                     icon: Icon(
                                       Icons.lock_outline,
                                       color: Colors.white,
-                                      size: 40,
+                                      size: 30,
                                     )),
                                 IconButton(
                                     onPressed: () {},
                                     icon: Icon(
                                       Icons.skip_previous,
                                       color: Colors.white,
-                                      size: 40,
+                                      size: 45,
                                     )),
                                 IconButton(
                                     onPressed: () =>
@@ -154,21 +178,21 @@ borderRadius: BorderRadius.circular(6),
                                           ? Icons.pause
                                           : Icons.play_arrow,
                                       color: Colors.white,
-                                      size: 40,
+                                      size: 45,
                                     )),
                                 IconButton(
                                     onPressed: () {},
                                     icon: Icon(
                                       Icons.skip_next,
                                       color: Colors.white,
-                                      size: 40,
+                                      size: 45,
                                     )),
                                 IconButton(
                                     onPressed: () {},
                                     icon: Icon(
                                       Icons.fullscreen_outlined,
                                       color: Colors.white,
-                                      size: 40,
+                                      size: 30,
                                     )),
                               ],
                             )
