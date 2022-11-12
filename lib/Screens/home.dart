@@ -139,12 +139,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
-                  onTap: () => fullvideo[index].path ,
+                  // onTap: () =>  ,
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,
                   ),
-                   title: Text(fullvideo[index].folderName),
+                   title: Text(Videofolders.elementAt(index)),
                   
                 ),
                 separatorBuilder: (context, index) => Divider(),

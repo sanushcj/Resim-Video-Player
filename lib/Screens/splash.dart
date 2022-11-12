@@ -134,7 +134,7 @@ box.put('MyVideos', allvideos);
   
 fullvideo = box.get('MyVideos')!;
 // log('${fullvideo[5].title}');
-   Videofolders = Videolist2.map((e) => e.folderName.toString()).toList().toSet();
+   Videofolders = fullvideo.map((e) => e.folderName.toString()).toList().toSet();
    VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
   //  VideoPath = Videolist2.map((e) => e.path.toString()).toList();
   //  VideoSize = Videolist2.map((e) => e.size.toString()).toList();

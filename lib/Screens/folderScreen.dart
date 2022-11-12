@@ -123,7 +123,9 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
                           child: Row(
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                 
+                                },
                                 icon: Icon(Icons.chrome_reader_mode),
                               ),
                               SizedBox(

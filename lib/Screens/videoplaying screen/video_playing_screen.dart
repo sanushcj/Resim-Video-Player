@@ -1,9 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resimvideoplayer/Screens/splash.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../imp functions/functins.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage(
@@ -21,13 +24,14 @@ class VideoPlayerPage extends StatefulWidget {
 
 class _VideoPlayerState extends State<VideoPlayerPage> {
   late VideoPlayerController videoPlayerController;
-  _playVideo({int index = 0, bool init = false}) {
-    if (index < 0 || index >= fullvideo.length) return;
-    videoPlayerController =
-        VideoPlayerController.file(File(widget.VideoFetched))
-          ..addListener(() => setState(() {}))
-          ..setLooping(true)
-          ..initialize().then((value) => setState(() {}));
+
+  _playVideo() {
+    videoPlayerController = VideoPlayerController.file(
+        File(widget.VideoFetched),
+        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true))
+      ..addListener(() => setState(() {}))
+      ..setLooping(true)
+      ..initialize().then((value) => setState(() {}));
   }
 
   String _videoDuration(Duration duration) {
@@ -47,19 +51,18 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   @override
   void initState() {
     super.initState();
-    _playVideo(init: true);
+    _playVideo();
     StatusBarHide();
   }
 
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    StatusBarHide();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    log('${widget.Indexofvideo}');
+
+    // int CurrentIndex = widget.Indexofvideo;
+
     return Scaffold(
       body: Container(
           height: MediaQuery.of(context).size.height,
@@ -96,7 +99,10 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                           Text(
                             widget.VTitle,
                             style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),SizedBox(width: 10,),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
                           IconButton(
                               onPressed: () {},
                               icon: Icon(
@@ -129,13 +135,16 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                 Expanded(
                                   child: Container(
                                     height: 40,
+                                    // decoration: BoxDecoration(border: Border.all() ),s
                                     child: VideoProgressIndicator(
                                         videoPlayerController,
                                         colors: VideoProgressColors(
                                             backgroundColor: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            playedColor: Colors.red,
-                                            bufferedColor: Colors.black),
+                                                14, 255, 255, 255),
+                                            playedColor: Color.fromARGB(
+                                                184, 125, 28, 229),
+                                            bufferedColor:
+                                                Color.fromARGB(0, 0, 0, 0)),
                                         allowScrubbing: true,
                                         padding: const EdgeInsets.symmetric(
                                           vertical: 15,
@@ -162,7 +171,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                       size: 30,
                                     )),
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        // previousVideo(widget.Indexofvideo, widget.VideoFetched, widget.VTitle);
+                                      });
+                                    },
                                     icon: Icon(
                                       Icons.skip_previous,
                                       color: Colors.white,
@@ -181,7 +194,19 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                       size: 45,
                                     )),
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                     if (videoPlayerController
+                                            .value.isPlaying) {
+                                          videoPlayerController.pause();
+                                        }
+
+                                        int newindex = widget.Indexofvideo++;
+                                        widget.VTitle =
+                                            fullvideo[newindex].title;
+                                        widget.VideoFetched =
+                                            fullvideo[newindex].path;
+                                        _playVideo();
+                                    },
                                     icon: Icon(
                                       Icons.skip_next,
                                       color: Colors.white,
@@ -206,6 +231,12 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                   child: CircularProgressIndicator(color: Colors.white),
                 )),
     );
+  }
+    @override
+  void dispose() {
+    videoPlayerController.dispose();
+    StatusBarHide();
+    super.dispose();
   }
 }
 
