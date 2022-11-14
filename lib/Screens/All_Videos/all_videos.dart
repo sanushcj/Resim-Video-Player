@@ -1,23 +1,26 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../widgets/bottomsheet.dart';
+import 'package:resimvideoplayer/widgets/bottomsheet.dart';
+
 import '../Search/search.dart';
 import '../Settings/settings.dart';
 import '../Splash/splash.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
 class AllVideos extends StatelessWidget {
-  const AllVideos({super.key});
+  AllVideos({super.key});
+
+  BottomSheetClass obj = BottomSheetClass();
+
 // SortFunctions functionnn = SortFunctions();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
-        body: Column(
+        body: ListView(
           children: [
             Container(
               height: 75.h,
@@ -141,27 +144,26 @@ class AllVideos extends StatelessWidget {
                     // abc.sort((a, b) => a.length.compareTo(b.length));
                     // log('$abc after sorting');
 
-//  fullvideo.sort((a, b) => a.length.compareTo(b.length));
-
+                    //  fullvideo.sort((a, b) => a.length.compareTo(b.length));
                     // log('message');
                     return ListTile(
                       // onTap:() {
                       //   return log('Inside print');
                       //   //
                       // },
-                      onLongPress: () => showCustomBottomSheet(context, index),
-                      onTap:() { 
+                      onLongPress: () =>
+                          obj.showCustomBottomSheet(context, index),
+                      onTap: () {
                         Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => VideoPlayerPage(
-                            VideoFetched: fullvideo[index].path.toString(),
-                            VTitle: (fullvideo[index].title.toString()),
-                            Indexofvideo: index,
+                          MaterialPageRoute(
+                            builder: (_) => VideoPlayerPage(
+                              VideoFetched: fullvideo[index].path.toString(),
+                              VTitle: (fullvideo[index].title.toString()),
+                              Indexofvideo: index,
+                            ),
                           ),
-                        ),
-                      );
-
-                      }, 
+                        );
+                      },
                       title: Text(fullvideo[index].title.toString()),
                       // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
                     );

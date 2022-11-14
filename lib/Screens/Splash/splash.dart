@@ -18,7 +18,7 @@ List <String> VideoDuration = [];
 Set  <String>  Videofolders = {};
 List<dynamic> fullvideo=[];
 List<VideoDatass> allvideos = [];
-dynamic  datadata;
+// dynamic  datadata;
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -136,12 +136,6 @@ fullvideo = box.get('MyVideos')!;
 // log('${fullvideo[5].title}');
    Videofolders = fullvideo.map((e) => e.folderName.toString()).toList().toSet();
    VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
-  //  VideoPath = Videolist2.map((e) => e.path.toString()).toList();
-  //  VideoSize = Videolist2.map((e) => e.size.toString()).toList();
-  //  VideoDuration = Videolist2.map((e) => e.duration.toString()).toList();
-  //  log('$VideoTitles');
-// print(Videofiless);
-
 
 
 

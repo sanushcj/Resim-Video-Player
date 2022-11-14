@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Screens/Favorites/favorite_mian.dart';
 import '../Search/search.dart';
 import '../Settings/settings.dart';
+import '../videoplaying screen/video_playing_screen.dart';
 
 class UserFav extends StatelessWidget {
   const UserFav({super.key});
@@ -113,13 +115,38 @@ class UserFav extends StatelessWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                      BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.325,
-              
-            )
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(30))),
+                height: MediaQuery.of(context).size.height / 1.325,
+                child: ListView.separated(
+                  padding: EdgeInsets.only(top: 15),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                  
+                    return ListTile(
+                 
+                      // onLongPress: () =>
+                          // obj.showCustomBottomSheet(context, index),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => VideoPlayerPage(
+                              VideoFetched: likedVideos[index].path.toString(),
+                              VTitle: (likedVideos[index].title),
+                              Indexofvideo: index,
+                            ),
+                          ),
+                        );
+                      },
+                      title: Text(likedVideos[index].title.toString()),
+                      // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: likedVideos.length,
+                )),
           ],
         ),
       ),

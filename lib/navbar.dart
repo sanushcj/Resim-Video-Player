@@ -5,8 +5,8 @@ import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'Screens/All_Videos/all_videos.dart';
 import 'Screens/Home/home.dart';
-import 'Screens/Favorites/my.dart';
-import 'Screens/PlayList/playlist.dart';
+import 'Screens/Favorites/favorite_screen.dart';
+import 'Screens/PlayList/playlist_screen.dart';
 
 class NavBar extends StatefulWidget {
    const NavBar({super.key, });
@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
      const HomeScreen(),
-     const AllVideos(),
+      AllVideos(),
     const UserFav(),
     PlaylistPage(),
   ];

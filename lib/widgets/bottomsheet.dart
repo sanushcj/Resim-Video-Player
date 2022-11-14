@@ -1,9 +1,14 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-
+import '../Screens/Favorites/favorite_mian.dart';
+import '../Screens/PlayList/playlistmain.dart';
 import 'alertdialogues.dart';
 
-Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
+class BottomSheetClass  {
+
+  PlayListBackend obj = PlayListBackend();
+  FavMain fv = FavMain();
+Future<void> showCustomBottomSheet(BuildContext ctx, index,) async {
   log('$index');
   showModalBottomSheet(
       context: ctx,
@@ -33,7 +38,7 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                   onPressed: () => showAlertDialogPlayList(ctx1),
+                   onPressed:() => obj.showAlertDialogPlayList(ctx), 
                     icon: Icon(
                       Icons.list_alt_outlined,
                       color: Color.fromARGB(223, 0, 0, 0),
@@ -46,7 +51,9 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                    onPressed: () {},
+                    onPressed: () {
+                      log('$index >>>>>>>>>>>>>>>>>>>>');
+                      fv.AddFavv(index);},
                     icon: Icon(
                       Icons.favorite_border,
                       color: Color.fromARGB(223, 0, 0, 0),
@@ -76,3 +83,8 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
         );
       });
 }
+}
+
+
+
+
