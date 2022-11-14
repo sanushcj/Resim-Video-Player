@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:resimvideoplayer/Screens/splash.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../imp functions/functins.dart';
+import 'landscape_screen.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage(
@@ -52,22 +52,20 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   void initState() {
     super.initState();
     _playVideo();
-    StatusBarHide();
+    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     log('${widget.Indexofvideo}');
-
+StatusBarHide();
     // int CurrentIndex = widget.Indexofvideo;
 
     return Scaffold(
       body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: Colors.green,
+          color: Color.fromARGB(255, 0, 0, 0),
           child: videoPlayerController.value.isInitialized
               ? Stack(
                   // alignment: Alignment.center,
@@ -172,9 +170,19 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                     )),
                                 IconButton(
                                     onPressed: () {
-                                      setState(() {
-                                        // previousVideo(widget.Indexofvideo, widget.VideoFetched, widget.VTitle);
-                                      });
+                                      
+                                      if (videoPlayerController
+                                          .value.isPlaying) {
+                                        videoPlayerController.pause();
+                                      }
+                                      int newindex = widget.Indexofvideo--;
+                                      if (newindex >= 0) {
+                                        widget.VTitle =
+                                            fullvideo[newindex].title;
+                                        widget.VideoFetched =
+                                            fullvideo[newindex].path;
+                                        _playVideo();
+                                      } 
                                     },
                                     icon: Icon(
                                       Icons.skip_previous,
@@ -195,17 +203,18 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                     )),
                                 IconButton(
                                     onPressed: () {
-                                     if (videoPlayerController
-                                            .value.isPlaying) {
-                                          videoPlayerController.pause();
-                                        }
-
-                                        int newindex = widget.Indexofvideo++;
+                                      int newindex = widget.Indexofvideo++;
+                                      if (videoPlayerController
+                                          .value.isPlaying) {
+                                        videoPlayerController.pause();
+                                      }
+                                      if (newindex <= fullvideo.length) {
                                         widget.VTitle =
                                             fullvideo[newindex].title;
                                         widget.VideoFetched =
                                             fullvideo[newindex].path;
                                         _playVideo();
+                                      }
                                     },
                                     icon: Icon(
                                       Icons.skip_next,
@@ -213,7 +222,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                       size: 45,
                                     )),
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed:() => LandscapePlayerPage,
                                     icon: Icon(
                                       Icons.fullscreen_outlined,
                                       color: Colors.white,
@@ -228,11 +237,12 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                   ],
                 )
               : Center(
-                  child: CircularProgressIndicator(color: Colors.white),
+                  child: CircularProgressIndicator(color: Colors.white)
                 )),
     );
   }
-    @override
+
+  @override
   void dispose() {
     videoPlayerController.dispose();
     StatusBarHide();

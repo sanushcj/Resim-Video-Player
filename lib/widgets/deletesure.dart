@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../imp functions/functins.dart';
+// import '../imp functions/functins.dart';
 
 showAlertDialogDelete(BuildContext context) {
 
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text("Cancel"),
-    onPressed:  () {snackbar(context);},
+    onPressed:  () {(context);},
   );
   Widget continueButton = TextButton(
     child: Text("Delete",style: TextStyle(color: Colors.red),),

@@ -140,7 +140,10 @@ fullvideo = box.get('MyVideos')!;
   //  VideoSize = Videolist2.map((e) => e.size.toString()).toList();
   //  VideoDuration = Videolist2.map((e) => e.duration.toString()).toList();
   //  log('$VideoTitles');
-   
 // print(Videofiless);
+
+
+
+
 }
 }
