@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'search.dart';
-import 'settings.dart';
+import '../Search/search.dart';
+import '../Settings/settings.dart';
 
 class UserFav extends StatelessWidget {
   const UserFav({super.key});

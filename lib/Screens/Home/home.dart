@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'all_videos.dart';
-import 'search.dart';
-import 'settings.dart';
-import 'splash.dart';
+import '../All_Videos/all_videos.dart';
+import '../Search/search.dart';
+import '../Settings/settings.dart';
+import '../Splash/splash.dart';
 
 class HomeScreen extends StatefulWidget {
    const HomeScreen({super.key, });

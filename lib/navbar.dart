@@ -3,10 +3,10 @@
 
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'Screens/all_videos.dart';
-import 'Screens/home.dart';
-import 'Screens/my.dart';
-import 'Screens/playlist.dart';
+import 'Screens/All_Videos/all_videos.dart';
+import 'Screens/Home/home.dart';
+import 'Screens/Favorites/my.dart';
+import 'Screens/PlayList/playlist.dart';
 
 class NavBar extends StatefulWidget {
    const NavBar({super.key, });

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:resimvideoplayer/Screens/splash.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:video_player/video_player.dart';
 
 import 'landscape_screen.dart';

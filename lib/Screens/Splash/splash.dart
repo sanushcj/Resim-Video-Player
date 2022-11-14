@@ -5,11 +5,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../DB/modelclass.dart';
-import '../DB/videodata.dart';
+import '../../DB/modelclass.dart';
+import '../../DB/videodata.dart';
 
-import '../main.dart';
-import '../navbar.dart';
+import '../../main.dart';
+import '../../navbar.dart';
 
 List <String> VideoTitles = [];
 List <String>  VideoSize = [];

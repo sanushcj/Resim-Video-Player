@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'all_videos.dart';
-import 'search.dart';
-import 'settings.dart';
-import 'splash.dart';
+import '../All_Videos/all_videos.dart';
+import '../Search/search.dart';
+import '../Settings/settings.dart';
+import '../Splash/splash.dart';
 
 class FolderOpenScreen extends StatefulWidget {
    const FolderOpenScreen({super.key, });

@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
-import 'deletesure.dart';
+import 'alertdialogues.dart';
 
 Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
+  log('$index');
   showModalBottomSheet(
       context: ctx,
       builder: (ctx1) {
@@ -31,7 +33,7 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index) async {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                    onPressed: () {},
+                   onPressed: () => showAlertDialogPlayList(ctx1),
                     icon: Icon(
                       Icons.list_alt_outlined,
                       color: Color.fromARGB(223, 0, 0, 0),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'DB/modelclass.dart';
-import 'Screens/splash.dart';
+import 'Screens/Splash/splash.dart';
 
 final Box<List<dynamic>> box = StorageBox.getInstance();
 
