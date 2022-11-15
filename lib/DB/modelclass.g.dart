@@ -12,7 +12,6 @@ class VideoDatassAdapter extends TypeAdapter<VideoDatass> {
 
   @override
   VideoDatass read(BinaryReader reader) {
-    // ignore: always_specify_types
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
@@ -23,13 +22,14 @@ class VideoDatassAdapter extends TypeAdapter<VideoDatass> {
       size: fields[3] as String,
       duration: fields[4] as String,
       path: fields[5] as String,
+      Date: fields[6] as String,
     )..id = fields[0] as int?;
   }
 
   @override
   void write(BinaryWriter writer, VideoDatass obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +41,9 @@ class VideoDatassAdapter extends TypeAdapter<VideoDatass> {
       ..writeByte(4)
       ..write(obj.duration)
       ..writeByte(5)
-      ..write(obj.path);
+      ..write(obj.path)
+      ..writeByte(6)
+      ..write(obj.Date);
   }
 
   @override

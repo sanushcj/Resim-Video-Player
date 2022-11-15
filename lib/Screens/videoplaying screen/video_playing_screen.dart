@@ -50,8 +50,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
   @override
   void initState() {
+
     super.initState();
     _playVideo();
+        // videoPlayerController.value.isPlaying;
+     videoPlayerController.play();
     
   }
 

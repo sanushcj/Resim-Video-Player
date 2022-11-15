@@ -125,7 +125,7 @@ class _SplashscreenState extends State<Splashscreen> {
     }).toList();
     log('Function Working');
      GoToHome(context);
-     allvideos = Videolist2.map((e) => VideoDatass(title: e.title!, folderName: e.folderName!, size: e.size!, duration: e.duration.toString(), path: e.path!)).toList();
+     allvideos = Videolist2.map((e) => VideoDatass(title: e.title!, folderName: e.folderName!, size: e.size!, duration: e.duration.toString(), path: e.path!, Date: e.Date!)).toList();
      
 box.put('MyVideos', allvideos);
 // log('${}');

@@ -8,6 +8,7 @@ package com.example.resimvideoplayer
        val duration: Long=0,
        val path: String,
        val folderName: String,
+       val DateAdded: String
 )
 
 

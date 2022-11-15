@@ -4,7 +4,7 @@ part 'modelclass.g.dart';
 @HiveType(typeId: 1)
 
 class VideoDatass {
-  VideoDatass({required this.title, required this.folderName, required this.size, required this.duration, required this.path,});
+  VideoDatass({required this.title, required this.folderName, required this.size, required this.duration, required this.path,required this.Date,});
 
   @HiveField(0)
   int? id;
@@ -23,6 +23,9 @@ class VideoDatass {
 
   @HiveField(5)
   final String path;
+
+    @HiveField(6)
+  final String Date;
 
 
 

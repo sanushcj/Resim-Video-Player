@@ -7,7 +7,8 @@ class VideoListData {
       this.folderName,
       this.id,
       this.path,
-      this.title,});
+      this.title,
+      this.Date});
 
   VideoListData.fromJson(Map<String, dynamic> json) {
     size = json['Size'] as String;
@@ -16,6 +17,7 @@ class VideoListData {
     id = json['id'] as String;
     path = json['path'] as String;
     title = json['title'] as String;
+    Date = json['DateAdded'] as String;
     //  print("folderName");
   }
   String? size;
@@ -24,6 +26,7 @@ class VideoListData {
   String? id;
   String? path;
   String? title;
+  String? Date;
 
   // Map<String, dynamic> toJson() {
   //   final Map<String, dynamic> data = <String, dynamic>{};
