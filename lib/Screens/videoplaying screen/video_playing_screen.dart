@@ -7,24 +7,42 @@ import 'package:marquee_text/marquee_text.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:video_player/video_player.dart';
 
-import 'landscape_screen.dart';
-
 class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage(
       {super.key,
       required this.VideoFetched,
       required this.VTitle,
-      required this.Indexofvideo});
+      required this.Indexofvideo,
+      this.ControllerFromLandscape});
 
   String VideoFetched;
   String VTitle;
   int Indexofvideo;
+  var ControllerFromLandscape;
+
   @override
   State<VideoPlayerPage> createState() => _VideoPlayerState();
 }
 
 class _VideoPlayerState extends State<VideoPlayerPage> {
   late VideoPlayerController videoPlayerController;
+
+  Future _landscapeMode() async {
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  Future _portraitMode() async {
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
+  Future _setAllOrientation() async {
+    await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+  }
 
   _playVideo() {
     videoPlayerController = VideoPlayerController.file(
@@ -51,17 +69,24 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
   @override
   void initState() {
-
     super.initState();
     _playVideo();
-     videoPlayerController.play();
-    
+    videoPlayerController.play();
+    _setAllOrientation();
+  }
+
+  @override
+  void dispose() {
+    videoPlayerController.dispose();
+
+    super.dispose();
+    _setAllOrientation();
+    StatusBarHide();
   }
 
   @override
   Widget build(BuildContext context) {
     log('${widget.Indexofvideo}');
-StatusBarHide();
     // int CurrentIndex = widget.Indexofvideo;
 
     return Scaffold(
@@ -73,15 +98,22 @@ StatusBarHide();
               ? Stack(
                   // alignment: Alignment.center,
                   children: [
-                    Container(
-                        height: MediaQuery.of(context).size.height,
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(20),
-                        child: AspectRatio(
-                          aspectRatio: videoPlayerController.value.aspectRatio,
-                          child: VideoPlayer(videoPlayerController),
-                        )),
+                    InkWell(
+                      onDoubleTap: () => videoPlayerController.value.isPlaying
+                          ? videoPlayerController.pause()
+                          : videoPlayerController.play(),
+                      onTap: () => StatusBarHide(),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(20),
+                          child: AspectRatio(
+                            aspectRatio:
+                                videoPlayerController.value.aspectRatio,
+                            child: VideoPlayer(videoPlayerController),
+                          )),
+                    ),
                     Container(
                       width: double.infinity,
                       height: 70,
@@ -89,7 +121,7 @@ StatusBarHide();
                       child: Row(
                         children: [
                           IconButton(
-                              onPressed: (() {}),
+                              onPressed: () => Navigator.of(context).pop(true),
                               icon: Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
@@ -101,11 +133,11 @@ StatusBarHide();
                             width: 250,
                             child: MarqueeText(
                               text: TextSpan(
-           text:widget.VTitle,
-         ),
-         speed: 10,
-                              
-                              style: TextStyle(fontSize: 20, color: Colors.white),
+                                text: widget.VTitle,
+                              ),
+                              speed: 10,
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
                           SizedBox(
@@ -180,7 +212,6 @@ StatusBarHide();
                                     )),
                                 IconButton(
                                     onPressed: () {
-                                      
                                       if (videoPlayerController
                                           .value.isPlaying) {
                                         videoPlayerController.pause();
@@ -192,7 +223,7 @@ StatusBarHide();
                                         widget.VideoFetched =
                                             fullvideo[newindex].path;
                                         _playVideo();
-                                      } 
+                                      }
                                     },
                                     icon: Icon(
                                       Icons.skip_previous,
@@ -232,12 +263,33 @@ StatusBarHide();
                                       size: 45,
                                     )),
                                 IconButton(
-                                    onPressed:() => LandscapePlayerPage,
-                                    icon: Icon(
-                                      Icons.fullscreen_outlined,
-                                      color: Colors.white,
-                                      size: 30,
-                                    )),
+                                    onPressed: () {
+                                      log('presseddddddddddddd full screen');
+                                      // Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             LandscapePlayerPage(
+                                      //               controller:
+                                      //                   videoPlayerController,
+                                      //               VTitle: widget.VTitle,
+                                      //             )));
+                                      MediaQuery.of(context).orientation ==
+                                              Orientation.portrait
+                                          ? _landscapeMode()
+                                          : _portraitMode();
+                                    },
+                                    icon: MediaQuery.of(context).orientation ==
+                                            Orientation.portrait
+                                        ? Icon(
+                                            Icons.stay_current_landscape,
+                                            color: Colors.white,
+                                            size: 30,
+                                          )
+                                        : Icon(
+                                            Icons.stay_current_portrait,
+                                            color: Colors.white,
+                                            size: 30,
+                                          )),
                               ],
                             )
                           ],
@@ -246,41 +298,10 @@ StatusBarHide();
                     ),
                   ],
                 )
-              : Center(
-                  child: CircularProgressIndicator(color: Colors.white)
-                )),
+              : Center(child: CircularProgressIndicator(color: Colors.white))),
     );
   }
-
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    StatusBarHide();
-    super.dispose();
-  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // // ignore_for_file: file_names
 
@@ -401,7 +422,7 @@ StatusBarHide();
 //     _customVideoPlayerController = CustomVideoPlayerController(
 //       context: context,
 //       videoPlayerController: videoPlayerController,
-//     ); 
+//     );
 //   }
 
 //   @override
