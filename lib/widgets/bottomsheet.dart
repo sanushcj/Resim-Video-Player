@@ -1,13 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import '../Screens/Favorites/favorite_mian.dart';
+import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
+import 'package:resimvideoplayer/main.dart';
 import '../Screens/PlayList/playlistmain.dart';
 import 'alertdialogues.dart';
 
 class BottomSheetClass  {
 
   PlayListBackend obj = PlayListBackend();
-  FavMain fv = FavMain();
+
 Future<void> showCustomBottomSheet(BuildContext ctx, index,) async {
   log('$index');
   showModalBottomSheet(
@@ -52,8 +54,19 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index,) async {
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
                     onPressed: () {
-                      log('$index >>>>>>>>>>>>>>>>>>>>');
-                      fv.AddFavv(index);},
+                        //  fv.AddFavv(index,fullvideo[index].path,);
+                      // log('$index');log('${fullFavVideo.length} print');
+  // likedVideos =  fullvideo[index].path;
+  //   log('$likedVideos');
+  //    box.put("FavVideo", likedVideos);
+  // fullFavVideo =   box.get('FavVideo')!;
+  // log('0000000000000');
+  // log('$fullFavVideo ');
+addtoFav(fullvideo[index].path);
+
+  // Navigator.of(ctx).push(MaterialPageRoute(builder: (context) => Favoritemain(index: index, path: fullvideo[index].path, Title: fullvideo[index].title,),));
+                   
+                      },
                     icon: Icon(
                       Icons.favorite_border,
                       color: Color.fromARGB(223, 0, 0, 0),
@@ -83,6 +96,12 @@ Future<void> showCustomBottomSheet(BuildContext ctx, index,) async {
         );
       });
 }
+
+  void addtoFav(path,) {
+    log('$path');
+    Fav.add(path);
+    box.put('MyFavVideo', Fav);
+  }
 }
 
 

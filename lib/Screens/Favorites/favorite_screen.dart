@@ -1,17 +1,28 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:resimvideoplayer/Screens/Favorites/favorite_mian.dart';
+import 'package:resimvideoplayer/main.dart';
 import '../Search/search.dart';
 import '../Settings/settings.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
-class UserFav extends StatelessWidget {
+List <dynamic> Fav = [];
+List <dynamic> FavDB = [];
+class UserFav extends StatefulWidget {
   const UserFav({super.key});
 
   @override
+  State<UserFav> createState() => _UserFavState();
+}
+
+class _UserFavState extends State<UserFav> {
+  @override
   Widget build(BuildContext context) {
+    FavDB = box.get('MyFavVideo')!;
+    log('${FavDB[1]} this is favssonggg'); 
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
@@ -133,19 +144,19 @@ class UserFav extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => VideoPlayerPage(
-                              VideoFetched: likedVideos[index].path.toString(),
-                              VTitle: (likedVideos[index].title),
+                              VideoFetched: FavDB[index],
+                              VTitle: (FavDB[index].split('/').last),
                               Indexofvideo: index,
                             ),
                           ),
                         );
                       },
-                      title: Text(likedVideos[index].title.toString()),
+                      title: Text(FavDB[index].split('/').last),
                       // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
                     );
                   },
                   separatorBuilder: (context, index) => Divider(),
-                  itemCount: likedVideos.length,
+                  itemCount: FavDB.length,
                 )),
           ],
         ),

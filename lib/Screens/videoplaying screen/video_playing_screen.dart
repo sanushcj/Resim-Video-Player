@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:video_player/video_player.dart';
 
@@ -53,7 +54,6 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
     super.initState();
     _playVideo();
-        // videoPlayerController.value.isPlaying;
      videoPlayerController.play();
     
   }
@@ -97,9 +97,16 @@ StatusBarHide();
                           SizedBox(
                             width: 10,
                           ),
-                          Text(
-                            widget.VTitle,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          Container(
+                            width: 250,
+                            child: MarqueeText(
+                              text: TextSpan(
+           text:widget.VTitle,
+         ),
+         speed: 10,
+                              
+                              style: TextStyle(fontSize: 20, color: Colors.white),
+                            ),
                           ),
                           SizedBox(
                             width: 10,

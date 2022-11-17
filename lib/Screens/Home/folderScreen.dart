@@ -22,19 +22,6 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
     AllVideos();
   }
 
-  // List<String> namess = [
-  //   'Camera',
-  //   'DCIM',
-  //   'Videos',
-  //   'Movies',
-  //   'CBSE SLEEPING',
-  //   'Short Filims',
-  //   'Ajo Varghese Videos',
-  //   'Infopark',
-  //   'Abin K Ruby Videos',
-  //   'Wedding',
-  //   'Devotional Videos'
-  // ];
   @override
   Widget build(BuildContext context) {
 
@@ -155,7 +142,7 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
-                  onTap: () => fullvideo[index].path ,
+                  // onTap: () => 
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,

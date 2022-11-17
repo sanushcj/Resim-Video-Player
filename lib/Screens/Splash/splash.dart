@@ -10,6 +10,7 @@ import '../../DB/videodata.dart';
 
 import '../../main.dart';
 import '../../navbar.dart';
+import '../Home/foldervideofetch.dart';
 
 List <String> VideoTitles = [];
 List <String>  VideoSize = [];
@@ -136,7 +137,7 @@ fullvideo = box.get('MyVideos')!;
 // log('${fullvideo[5].title}');
    Videofolders = fullvideo.map((e) => e.folderName.toString()).toList().toSet();
    VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
-
+// getFolderVideos(fullvideo.path);
 
 
 }

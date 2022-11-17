@@ -19,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   int _currentselectionIndex = 0;
 
   final List<Widget> _pages = [
-     const HomeScreen(),
+      HomeScreen(),
       AllVideos(),
     const UserFav(),
     PlaylistPage(),

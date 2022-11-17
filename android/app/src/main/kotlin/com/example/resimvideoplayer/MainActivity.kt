@@ -108,13 +108,13 @@ class MainActivity : FlutterActivity() {
                                             val sizeC = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.SIZE))
                                             val pathC = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA))
                                             val durationC = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION)).toLong()
-val VidDate = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_ADDED))
+                                            val VidDate = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_ADDED))
                                             try {
 
                                                 val  file = File(pathC)
                                                 
 
-                                                val videoss = VideoListDetails(title=titleC, id = idC , folderName = folderC, Size = sizeC, path = pathC, duration = durationC, eDateAdded = VidDate)
+                                                val videoss = VideoListDetails(title=titleC, id = idC , folderName = folderC, Size = sizeC, path = pathC, duration = durationC, DateAdded = VidDate)
                                                 if (file.exists()) templistclass.add(videoss) }catch (e:java.lang.Exception){}
                                         }while (cursor.moveToNext())
                     cursor?.close()
