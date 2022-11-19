@@ -7,15 +7,15 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../DB/modelclass.dart';
 import '../../DB/videodata.dart';
-
 import '../../main.dart';
 import '../../navbar.dart';
-import '../Home/foldervideofetch.dart';
+import '../Favorites/favorite_screen.dart';
 
-List <String> VideoTitles = [];
-List <String>  VideoSize = [];
+// List <String> VideoTitles = [];
+// List <String>  VideoSize = [];
 List <String> VideoPath = [];
-List <String> VideoDuration = [];
+List <dynamic> FavDB = [];
+// List <String> VideoDuration = [];
 Set  <String>  Videofolders = {};
 List<dynamic> fullvideo=[];
 List<VideoDatass> allvideos = [];
@@ -132,12 +132,13 @@ box.put('MyVideos', allvideos);
 // log('${}');
    // ignore: unnecessary_brace_in_string_interps
    log('${Videolist2[2].path}');
-  
+
 fullvideo = box.get('MyVideos')!;
 // log('${fullvideo[5].title}');
    Videofolders = fullvideo.map((e) => e.folderName.toString()).toList().toSet();
-   VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
+  //  VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
 // getFolderVideos(fullvideo.path);
+FavDB = box.get('MyFavVideo')!;
 
 
 }

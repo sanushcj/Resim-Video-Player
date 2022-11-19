@@ -4,15 +4,18 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:resimvideoplayer/main.dart';
+import 'package:resimvideoplayer/widgets/bottomsheet.dart';
+import '../../main.dart';
 import '../Search/search.dart';
 import '../Settings/settings.dart';
+import '../Splash/splash.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
-List <dynamic> Fav = [];
-List <dynamic> FavDB = [];
+List<dynamic> Fav = [];
+
+// List <dynamic> FavDB = [];
 class UserFav extends StatefulWidget {
-  const UserFav({super.key});
+  UserFav({super.key});
 
   @override
   State<UserFav> createState() => _UserFavState();
@@ -21,8 +24,8 @@ class UserFav extends StatefulWidget {
 class _UserFavState extends State<UserFav> {
   @override
   Widget build(BuildContext context) {
-    FavDB = box.get('MyFavVideo')!;
-    log('${FavDB[1]} this is favssonggg'); 
+    // log('${FavDB[1]} this is favssonggg');
+    BottomSheetClass bs = BottomSheetClass();
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
@@ -53,18 +56,21 @@ class _UserFavState extends State<UserFav> {
                       'FAVORITE VIDEOS',
                       style: TextStyle(color: Colors.white),
                     ),
-                  ), Padding(
+                  ),
+                  Padding(
                     padding: EdgeInsets.only(left: 97.w, top: 20.h),
                     child: IconButton(
-                        onPressed: () { Navigator.of(context).push(MaterialPageRoute(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => SearchPage(),
-                          ));},
+                          ));
+                        },
                         icon: Icon(
                           Icons.search,
                           color: Colors.white,
                         )),
                   ),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20, left: 0.w),
                     child: PopupMenuButton<int>(
                       icon: Icon(
@@ -131,33 +137,37 @@ class _UserFavState extends State<UserFav> {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
                 height: MediaQuery.of(context).size.height / 1.325,
-                child: ListView.separated(
-                  padding: EdgeInsets.only(top: 15),
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                  
-                    return ListTile(
-                 
-                      // onLongPress: () =>
-                          // obj.showCustomBottomSheet(context, index),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => VideoPlayerPage(
-                              VideoFetched: FavDB[index],
-                              VTitle: (FavDB[index].split('/').last),
-                              Indexofvideo: index,
-                            ),
-                          ),
-                        );
-                      },
-                      title: Text(FavDB[index].split('/').last),
-                      // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: FavDB.length,
-                )),
+                child: FavDB.isNotEmpty
+                    ? ListView.separated(
+                        padding: EdgeInsets.only(top: 15),
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          log('${FavDB.length}.................');
+                          return ListTile(
+                            onLongPress: () => setState(() {
+                              bs.showCustomBottomSheet(context, FavDB, index);
+                            }),
+
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => VideoPlayerPage(
+                                    VideoFetched: FavDB[index],
+                                    VTitle: (FavDB[index].split('/').last),
+                                    Indexofvideo: index,
+                                  ),
+                                ),
+                              );
+                            },
+                            title: Text(FavDB[index].split('/').last),
+                            // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: FavDB.length)
+                    : Center(
+                        child: Text('Add Favorite Videos'),
+                      )),
           ],
         ),
       ),

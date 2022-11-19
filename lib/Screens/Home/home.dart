@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String a = path;
     List<dynamic> b = a.split('/');
     log(b.toString());
-    log(b[b.length-2]);
+    // log(b[b.length-2]);
     folderFetchedVideos = b[b.length-2];
 
   }

@@ -28,25 +28,6 @@ class VideoDatass {
   final String Date;
 }
 
-@HiveType(typeId: 2)
-
-class FavoriteModel {
-FavoriteModel({required this.title,required this.location});
-  
-  @HiveField(0)
-  int? id;
-
-  @HiveField(1)
-  final String title;
-
-   @HiveField(2)
-  final String location;
-  
-}
-
-
-
-
 String boxname = 'Videos';
 // ignore: avoid_classes_with_only_static_members
 class StorageBox {

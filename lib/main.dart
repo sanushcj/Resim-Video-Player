@@ -5,8 +5,6 @@ import 'DB/modelclass.dart';
 import 'Screens/Splash/splash.dart';
 
 final Box<List<dynamic>> box = StorageBox.getInstance();
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
