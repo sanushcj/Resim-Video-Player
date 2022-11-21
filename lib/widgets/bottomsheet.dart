@@ -1,18 +1,37 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
-import 'package:resimvideoplayer/main.dart';
 import '../Screens/Favorites/functions.dart';
 import '../Screens/PlayList/playlistmain.dart';
 import 'alertdialogues.dart';
 
+
+// class BottomSheetClass extends StatelessWidget {
+//    BottomSheetClass({super.key,required this.bottom,required this.intex, this.pathofvid,});
+
+// List bottom = [];
+//  int intex;
+//  String? pathofvid;
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
 class BottomSheetClass {
+// BottomSheetClass({required this.bottom,required this.intex, this.pathofvid,});
+ List bottom = [];
+//  int intex;
+ String? pathofvid;
   PlayListBackend obj = PlayListBackend();
 Favoritesfunctions fff =Favoritesfunctions();
-  Future<dynamic> showCustomBottomSheet(
-    BuildContext ctx, List bottom,
-    index,  
+  Future<void> showCustomBottomSheet(
+    BuildContext ctx,  bottom,
+    index,
   ) async {
     log('$index');
     showModalBottomSheet(
@@ -105,3 +124,4 @@ Favoritesfunctions fff =Favoritesfunctions();
 
 
 }
+

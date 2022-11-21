@@ -8,6 +8,7 @@ import '../Settings/settings.dart';
 
 class PlaylistPage extends StatelessWidget {
    PlaylistPage({super.key});
+  
   List<String> namess = [
     'Camera',
     'DCIM',

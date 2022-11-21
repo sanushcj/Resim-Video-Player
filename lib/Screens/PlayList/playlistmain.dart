@@ -76,4 +76,33 @@ showAlertDialogPlayList(
     },
   );
 }
+
+ Future<void> showCustomBottomSheet(
+    BuildContext ctx, 
+    index,
+  ) async {
+    log('$index');
+    showModalBottomSheet(
+        context: ctx,
+        builder: (ctx1) {
+          return Container(
+            height: 208,
+            color: Color.fromARGB(255, 214, 247, 255),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: []
+                
+              ),
+            ),
+          );
+        });
+
+
+
+
+}
 }

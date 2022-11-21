@@ -22,7 +22,6 @@ showAlertDialogDelete(BuildContext context, List bottom,
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-        
       bottom.remove(bottom[index]);
         Navigator.of(context).pop();
       });

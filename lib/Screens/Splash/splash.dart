@@ -17,7 +17,7 @@ List <String> VideoPath = [];
 List <dynamic> FavDB = [];
 // List <String> VideoDuration = [];
 Set  <String>  Videofolders = {};
-List<dynamic> fullvideo=[];
+ List fullvideo=[];
 List<VideoDatass> allvideos = [];
 // dynamic  datadata;
 

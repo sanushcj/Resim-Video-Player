@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+// fullvideo.folderName.length;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),
       body: SafeArea(
@@ -142,10 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
-                  onTap: () {
-                    // function(fullvideo[index].path);
-                  },
-                  // onTap: () =>  fullvideo[index].path.split('/').last,
+                
+                  onTap: () => functionpathSplit(fullvideo[index].path),
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,
@@ -164,13 +162,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   
-  void function(String path ) {
+  Set functionpathSplit(String path ) {
     String a = path;
     List<dynamic> b = a.split('/');
     log(b.toString());
-    // log(b[b.length-2]);
-    folderFetchedVideos = b[b.length-2];
+    log('${b[b.length-2]};;;;;;;;;;;;');
+    // log('$folderFetchedVideos');
+    folderFetchedVideos =  b[b.length-2].toString() as Set<String>;
 
+   return folderFetchedVideos;
   }
 } 
-List <dynamic> folderFetchedVideos = [];
+Set <String> folderFetchedVideos = {};
