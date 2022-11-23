@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/main.dart';
 
 import '../Settings/settings.dart';
-
+import 'playlistmain.dart';
 
 class PlaylistPage extends StatelessWidget {
-   PlaylistPage({super.key});
-  
+  PlaylistPage({super.key});
+
   List<String> namess = [
     'Camera',
     'DCIM',
@@ -28,7 +29,7 @@ class PlaylistPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
-        body: Column(
+        body: ListView(
           children: [
             Container(
               height: 75.h,
@@ -131,7 +132,7 @@ class PlaylistPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.325 ,
+              height: MediaQuery.of(context).size.height / 1.325,
               width: MediaQuery.of(context).size.width,
               child: ListView(
                 children: [
@@ -139,7 +140,9 @@ class PlaylistPage extends StatelessWidget {
                     height: 10,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      showAlertDialogPlayList(context);
+                    },
                     child: Container(
                       margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                       width: MediaQuery.of(context).size.width,
@@ -165,16 +168,26 @@ class PlaylistPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                     height: MediaQuery.of(context).size.height / 1.325,
-                    child: GridView.builder(
-                      itemCount: 10,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                        itemBuilder: (context, index) => Card(child: Column(
-                          children: [
-                            Text(namess[index])
-                          ],
-                        ),),),
-                  ),
+                      height: MediaQuery.of(context).size.height / 1.325,
+                      child: Get_List_of_playlistNames.isNotEmpty
+                          ? GridView.builder(
+                            
+                              itemCount: Get_List_of_playlistNames.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, index) => InkWell(
+                                onTap: () => box.containsKey(key),
+                                child: Card(
+                                  child: Column(
+                                    children: [Text(Get_List_of_playlistNames[index])],
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Center(
+                              child: Text('Create new Playlist'),
+                            )),
                   Divider(
                     thickness: 1,
                   )

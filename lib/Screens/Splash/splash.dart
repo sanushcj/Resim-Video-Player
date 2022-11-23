@@ -10,6 +10,7 @@ import '../../DB/videodata.dart';
 import '../../main.dart';
 import '../../navbar.dart';
 import '../Favorites/favorite_screen.dart';
+import '../PlayList/playlistmain.dart';
 
 // List <String> VideoTitles = [];
 // List <String>  VideoSize = [];
@@ -19,6 +20,7 @@ List <dynamic> FavDB = [];
 Set  <String>  Videofolders = {};
  List fullvideo=[];
 List<VideoDatass> allvideos = [];
+List HPLN = [];
 // dynamic  datadata;
 
 class Splashscreen extends StatefulWidget {
@@ -139,7 +141,6 @@ fullvideo = box.get('MyVideos')!;
   //  VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
 // getFolderVideos(fullvideo.path);
 FavDB = box.get('MyFavVideo')!;
-
-
+Get_List_of_playlistNames = box.get('Playlistnamesss')!;
 }
 }

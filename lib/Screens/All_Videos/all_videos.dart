@@ -12,7 +12,7 @@ import '../videoplaying screen/video_playing_screen.dart';
 class AllVideos extends StatelessWidget {
   AllVideos({super.key});
 
-  BottomSheetClass obj = BottomSheetClass();
+  // BottomSheetClass obj = BottomSheetClass();
 
 // SortFunctions functionnn = SortFunctions();
   @override
@@ -152,7 +152,7 @@ class AllVideos extends StatelessWidget {
                       //   //
                       // },
                       onLongPress: () =>
-                          obj.showCustomBottomSheet(context,fullvideo[index].path,index),
+                          showCustomBottomSheet(context,fullvideo[index].path,index),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

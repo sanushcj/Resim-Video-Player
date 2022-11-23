@@ -25,7 +25,7 @@ class _UserFavState extends State<UserFav> {
   @override
   Widget build(BuildContext context) {
     // log('${FavDB[1]} this is favssonggg');
-    BottomSheetClass bs = BottomSheetClass();
+    // BottomSheetClass bs = BottomSheetClass();
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
@@ -145,7 +145,7 @@ class _UserFavState extends State<UserFav> {
                           log('${FavDB.length}.................');
                           return ListTile(
                             onLongPress: () => setState(() {
-                              bs.showCustomBottomSheet(context, FavDB, index);
+                             showCustomBottomSheet(context, FavDB, index);
                             }),
 
                             onTap: () {

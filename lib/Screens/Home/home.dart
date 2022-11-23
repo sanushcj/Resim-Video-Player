@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../widgets/bottomsheet.dart';
 import '../All_Videos/all_videos.dart';
+import '../PlayList/playlistmain.dart';
 import '../Search/search.dart';
 import '../Settings/settings.dart';
 import '../Splash/splash.dart';
@@ -63,8 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SearchPage(),
-                          ));
+                            builder: (context) => SearchPage()));
+                          // )); builder: (context) =>           
+                                   
                         },
                         icon: Icon(
                           Icons.search,
@@ -162,15 +165,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   
-  Set functionpathSplit(String path ) {
+   functionpathSplit(String path ) {
     String a = path;
     List<dynamic> b = a.split('/');
     log(b.toString());
-    log('${b[b.length-2]};;;;;;;;;;;;');
+    log('${b[b.length-2]}');
+    
     // log('$folderFetchedVideos');
     folderFetchedVideos =  b[b.length-2].toString() as Set<String>;
 
-   return folderFetchedVideos;
+   
   }
 } 
 Set <String> folderFetchedVideos = {};
