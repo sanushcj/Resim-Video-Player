@@ -29,37 +29,37 @@ class _UserFavState extends State<UserFav> {
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
         body: Column(
           children: [
-           AppBarVideo(),
+            AppBarVideo(),
             Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-  height: MediaQuery.of(context).size.height/1.23,                child: FavDB.isNotEmpty
+                height: MediaQuery.of(context).size.height / 1.33,
+                child: FavDB.isNotEmpty
                     ? ListView.separated(
                         padding: EdgeInsets.only(top: 15),
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                 
                           return ListTile(
-                            onLongPress: () => setState(() {
-                             showCustomBottomSheet(context, FavDB, index);
-                            }),
-
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => VideoPlayerPage(
-                                    VideoFetched: FavDB[index],
-                                    VTitle: (FavDB[index].split('/').last),
-                                    Indexofvideo: index,
+                              onLongPress: () => setState(() {
+                                    showCustomBottomSheet(
+                                        context, FavDB, index);
+                                  }),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => VideoPlayerPage(
+                                      VideoFetched: FavDB[index],
+                                      VTitle: (FavDB[index].split('/').last),
+                                      Indexofvideo: index,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            title: Text(FavDB[index].split('/').last),
-                            leading: Thumnailcontainer(VideoPath: FavDB[index], index: index));
-                      
+                                );
+                              },
+                              title: Text(FavDB[index].split('/').last),
+                              leading: Thumnailcontainer(
+                                  VideoPath: FavDB[index], index: index));
                         },
                         separatorBuilder: (context, index) => Divider(),
                         itemCount: FavDB.length)

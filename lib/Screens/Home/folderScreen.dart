@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Colors/mycolors.dart';
 import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
 import '../All_Videos/all_videos.dart';
@@ -27,20 +28,17 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 4, 57, 87),
+      backgroundColor: MainTheme,
       body: SafeArea(
         child: Column(
           children: [
-              AppBarVideo(),
-
+            AppBarVideo(),
             Expanded(
-              flex: 1,
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                      
                 child: ListView.separated(
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
@@ -49,12 +47,14 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
                       builder: (context) => VideoPlayerPage(
                         VideoFetched:
                             (widget.myfoldervideos[index].path.toString()),
-                        VTitle: ((widget.myfoldervideos[index].title.toString())),
+                        VTitle:
+                            ((widget.myfoldervideos[index].title.toString())),
                         Indexofvideo: index,
                       ),
                     )),
-                    leading: Thumnailcontainer(VideoPath: widget.myfoldervideos[index].path.toString(), index: index),
-                
+                    leading: Thumnailcontainer(
+                        VideoPath: widget.myfoldervideos[index].path.toString(),
+                        index: index),
                     title: Text(widget.myfoldervideos[index].title),
                   ),
                   separatorBuilder: (context, index) => Divider(),
@@ -62,7 +62,6 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
                 ),
               ),
             ),
-      
           ],
         ),
       ),

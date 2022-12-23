@@ -31,13 +31,14 @@ class _PlaylistPageState extends State<PlaylistPage> {
             child: IntrinsicHeight(
               child: Column(
                 children: [
-                     AppBarVideo(),
+                  AppBarVideo(),
                   Container(
                     decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
                         borderRadius:
                             BorderRadius.only(topLeft: Radius.circular(30))),
-  height: MediaQuery.of(context).size.height/1.23,                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 1.33,
+                    width: MediaQuery.of(context).size.width,
                     child: ListView(
                       children: [
                         SizedBox(
@@ -82,10 +83,8 @@ class _PlaylistPageState extends State<PlaylistPage> {
                                             crossAxisCount: 2),
                                     itemBuilder: (context, index) => InkWell(
                                       onLongPress: () {
-                                    
-                                          playlistDelete(context,
-                                              Get_List_of_playlistNames[index]);
-                                 
+                                        playlistDelete(context,
+                                            Get_List_of_playlistNames[index]);
                                       },
                                       onTap: () => Navigator.of(context)
                                           .push(MaterialPageRoute(

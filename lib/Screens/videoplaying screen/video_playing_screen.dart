@@ -46,7 +46,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   _playVideo() {
     videoPlayerController = VideoPlayerController.file(
         File(widget.VideoFetched),
-        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true))
+        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: false))
       ..addListener(() => setState(() {}))
       ..setLooping(true)
       ..initialize().then((value) => setState(() {}));

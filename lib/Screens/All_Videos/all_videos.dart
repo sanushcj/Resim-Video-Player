@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
 
-
 import 'package:flutter/material.dart';
 import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
@@ -27,12 +26,13 @@ class _AllVideosState extends State<AllVideos> {
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
         body: Column(
           children: [
-AppBarVideo(),            Container(
+            AppBarVideo(),
+            Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                 height: MediaQuery.of(context).size.height/1.23,
+                height: MediaQuery.of(context).size.height / 1.33,
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 15),
                   physics: BouncingScrollPhysics(),
@@ -62,9 +62,9 @@ AppBarVideo(),            Container(
                         ),
                       ),
 
-                      leading: Thumnailcontainer(VideoPath:fullvideo[index].path,index: index),
-                      
-  
+                      leading: Thumnailcontainer(
+                          VideoPath: fullvideo[index].path, index: index),
+
                       // thumnailsss.add() getThumbnail(fullvideo[index].path);
                     );
                   },

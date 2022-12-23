@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),
       body: SafeArea(
         child: Column(
+          
           children: [
             AppBarVideo(),
             Container(
@@ -42,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-           height: MediaQuery.of(context).size.height/1.23,
+           height: MediaQuery.of(context).size.height/1.33,
               child: ListView.separated(
                 physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
+               
                 itemBuilder: (context, index) => ListTile(
                   onTap: () {final myfoldervideos = getFolderVideos(Videofolders.elementAt(index));
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => FolderOpenScreen(myfoldervideos: a ),));
