@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'DB/modelclass.dart';
 import 'Screens/Splash/splash.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 backgroundColor: const Color.fromARGB(255, 4, 57, 87),
