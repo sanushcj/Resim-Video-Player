@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-           height: MediaQuery.of(context).size.height / 1.29,
+           height: MediaQuery.of(context).size.height / 1.30,
               child: ListView.separated(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,

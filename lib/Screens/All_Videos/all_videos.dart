@@ -144,7 +144,7 @@ class _AllVideosState extends State<AllVideos> {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                height: MediaQuery.of(context).size.height / 1.29,
+                height: MediaQuery.of(context).size.height / 1.30,
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 15),
                   physics: BouncingScrollPhysics(),

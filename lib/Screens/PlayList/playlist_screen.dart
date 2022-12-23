@@ -130,10 +130,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 255, 255, 255),
                         borderRadius:
                             BorderRadius.only(topLeft: Radius.circular(30))),
-                    height: MediaQuery.of(context).size.height / 1.29,
+                    height: MediaQuery.of(context).size.height / 1.30,
                     width: MediaQuery.of(context).size.width,
                     child: ListView(
                       children: [
@@ -179,10 +179,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
                                             crossAxisCount: 2),
                                     itemBuilder: (context, index) => InkWell(
                                       onLongPress: () {
-                                        setState(() {
+                                    
                                           playlistDelete(context,
                                               Get_List_of_playlistNames[index]);
-                                        });
+                                 
                                       },
                                       onTap: () => Navigator.of(context)
                                           .push(MaterialPageRoute(

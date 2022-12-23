@@ -37,7 +37,7 @@ class _UserFavState extends State<UserFav> {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(
-                        left: 20.0,
+                        left: 19.0,
                       ),
                       height: 80.h,
                       width: 40.w,
@@ -131,7 +131,7 @@ class _UserFavState extends State<UserFav> {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                height: MediaQuery.of(context).size.height / 1.29,
+                height: MediaQuery.of(context).size.height / 1.30,
                 child: FavDB.isNotEmpty
                     ? ListView.separated(
                         padding: EdgeInsets.only(top: 15),
