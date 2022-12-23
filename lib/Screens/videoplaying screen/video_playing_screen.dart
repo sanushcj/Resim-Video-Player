@@ -1,12 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:video_player/video_player.dart';
 
+// ignore: must_be_immutable
 class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage(
       {super.key,
@@ -62,10 +61,10 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
     return [if (duration.inHours > 0) hours, minutes, Seconds].join(':');
   }
 
-  StatusBarHide() async {
-    Duration(seconds: 4);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-  }
+  // StatusBarHide() async {
+  //   Duration(seconds: 4);
+  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  // }
 
   @override
   void initState() {
@@ -81,12 +80,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
     super.dispose();
     _setAllOrientation();
-    StatusBarHide();
+    // StatusBarHide();
   }
 
   @override
   Widget build(BuildContext context) {
-    log('${widget.Indexofvideo}');
     // int CurrentIndex = widget.Indexofvideo;
 
     return Scaffold(
@@ -102,7 +100,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                       onDoubleTap: () => videoPlayerController.value.isPlaying
                           ? videoPlayerController.pause()
                           : videoPlayerController.play(),
-                      onTap: () => StatusBarHide(),
+                      // onTap: () => StatusBarHide(),
                       child: Container(
                           height: MediaQuery.of(context).size.height,
                           width: double.infinity,
@@ -264,15 +262,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                     )),
                                 IconButton(
                                     onPressed: () {
-                                      log('presseddddddddddddd full screen');
-                                      // Navigator.of(context).push(
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             LandscapePlayerPage(
-                                      //               controller:
-                                      //                   videoPlayerController,
-                                      //               VTitle: widget.VTitle,
-                                      //             )));
+                     
                                       MediaQuery.of(context).orientation ==
                                               Orientation.portrait
                                           ? _landscapeMode()
@@ -301,11 +291,14 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
               : Center(child: CircularProgressIndicator(color: Colors.white))),
     );
   }
+  
+ 
 }
+
 
 // // ignore_for_file: file_names
 
-// import 'dart:io';
+// import ' io';
 // import 'package:file_picker/file_picker.dart';
 // import 'package:flutter/material.dart';
 // import 'package:video_player/video_player.dart';
@@ -392,7 +385,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 //       ..initialize().then((void value) => _controller.play());
 //   }
 // }
-// import 'dart:io';
+// import ' io';
 // import 'package:appinio_video_player/appinio_video_player.dart';
 // import 'package:flutter/material.dart';
 

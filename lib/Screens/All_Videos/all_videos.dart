@@ -1,18 +1,25 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Screens/Search/searchdelegate.dart';
+import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/widgets/bottomsheet.dart';
-
-import '../Search/search.dart';
 import '../Settings/settings.dart';
 import '../Splash/splash.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
-class AllVideos extends StatelessWidget {
+class AllVideos extends StatefulWidget {
   AllVideos({super.key});
 
+  @override
+  State<AllVideos> createState() => _AllVideosState();
+}
+
+class _AllVideosState extends State<AllVideos> {
   // BottomSheetClass obj = BottomSheetClass();
+  List<dynamic> thumnailsss = [];
 
 // SortFunctions functionnn = SortFunctions();
   @override
@@ -20,11 +27,11 @@ class AllVideos extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
-        body: ListView(
+        body: Column(
           children: [
             Container(
-              height: 75.h,
-              width: 360.w,
+              height: MediaQuery.of(context).size.height / 12,
+              width: double.infinity,
               color: const Color.fromARGB(255, 4, 57, 87),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,9 +59,7 @@ class AllVideos extends StatelessWidget {
                     padding: EdgeInsets.only(left: 85.w, top: 20.h),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SearchPage(),
-                          ));
+                        showSearch(context: context, delegate: MySearch());
                         },
                         icon: Icon(
                           Icons.search,
@@ -64,7 +69,11 @@ class AllVideos extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 0.w, top: 20.h),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                     
+     
+                      },
                       icon: Icon(Icons.import_export),
                       color: Colors.white,
                     ),
@@ -135,7 +144,7 @@ class AllVideos extends StatelessWidget {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                height: MediaQuery.of(context).size.height / 1.325,
+                height: MediaQuery.of(context).size.height / 1.29,
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 15),
                   physics: BouncingScrollPhysics(),
@@ -147,12 +156,8 @@ class AllVideos extends StatelessWidget {
                     //  fullvideo.sort((a, b) => a.length.compareTo(b.length));
                     // log('message');
                     return ListTile(
-                      // onTap:() {
-                      //   return log('Inside print');
-                      //   //
-                      // },
-                      onLongPress: () =>
-                          showCustomBottomSheet(context,fullvideo[index].path,index),
+                      onLongPress: () => showCustomBottomSheet(
+                          context, fullvideo[index].path, index),
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -164,8 +169,21 @@ class AllVideos extends StatelessWidget {
                           ),
                         );
                       },
-                      title: Text(fullvideo[index].title.toString()),
-                      // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
+                      title: Container(
+                        width: double.infinity,
+                        child: Text(
+                          fullvideo[index].title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                      ),
+
+                      leading: Thumnailcontainer(VideoPath:fullvideo[index].path,index: index),
+                      
+  
+                      // thumnailsss.add() getThumbnail(fullvideo[index].path);
                     );
                   },
                   separatorBuilder: (context, index) => Divider(),

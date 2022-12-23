@@ -1,22 +1,19 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:resimvideoplayer/main.dart';
 
-final playlistname_Controller = TextEditingController();
+import '../../widgets/alertdialogues.dart';
+import 'SeparatePlaylist.dart';
 
+final playlistname_Controller = TextEditingController();
 
 List Get_List_of_playlistNames = [];
 CreatingPlayList(TextEditingController newplaylistname) async {
-
   final Playlistname = newplaylistname.text.trim();
-  log('${Playlistname}');
-  if (Get_List_of_playlistNames.isNotEmpty) {
-    log('if case of playlistb worked');
-  }
   Get_List_of_playlistNames.add(Playlistname);
-  box.put('Playlistnamesss', Get_List_of_playlistNames);
-  log('${Get_List_of_playlistNames }');
+  box.put('AllPlayListNames', Get_List_of_playlistNames);
 }
 
 showAlertDialogPlayList(
@@ -77,13 +74,11 @@ PlaylistBottomSheet(
   BuildContext ctx,
   video,
 ) async {
-  log('$video 33');
   showModalBottomSheet(
       context: ctx,
       builder: (ctx1) {
-        log('$video path is coming in the playlist');
         return Container(
-          height: 250,
+          height: 300,
           color: Color.fromARGB(255, 214, 247, 255),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -110,14 +105,119 @@ PlaylistBottomSheet(
                       ),
                     ),
                   ),
+                  Divider(
+                    thickness: 1,
+                  ),
                   Expanded(
                     child: ListView.separated(
-                        itemBuilder: (context, index) => Text(Get_List_of_playlistNames[index]),
-                        separatorBuilder: (context, index) => Divider(
-                              thickness: 1
+                        itemBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                onTap: () => playlistChecking(
+                                    Get_List_of_playlistNames[index], video),
+                                title: Text(
+                                  Get_List_of_playlistNames[index],
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                leading: Icon(
+                                  Icons.playlist_add,
+                                  size: 25,
+                                ),
+                              ),
                             ),
+                        separatorBuilder: (context, index) =>
+                            Divider(thickness: 1),
                         itemCount: Get_List_of_playlistNames.length),
                   )
+                ]),
+          ),
+        );
+      });
+}
+
+playlistChecking(String Keyyy, String Video) {
+  if (box.containsKey(Keyyy)) {
+    VideosinPlayList.clear();
+    VideosinPlayList = box.get(Keyyy)!;
+    VideosinPlayList.add(Video);
+    box.put(Keyyy, VideosinPlayList);
+    log('Video in plaulistytttt $VideosinPlayList');
+  } else {
+    VideosinPlayList.clear();
+    VideosinPlayList.add(Video);
+    box.put(Keyyy, VideosinPlayList);
+  }
+}
+
+playlistDelete(
+  BuildContext ctx,
+  keyofthebox,
+) async {
+  showModalBottomSheet(
+      context: ctx,
+      builder: (ctx1) {
+        return Container(
+          height: 300,
+          color: Color.fromARGB(255, 214, 247, 255),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(0, 255, 0, 0),
+                          elevation: 0),
+                      onPressed: () =>
+                          showAlertDialogDeleteForPlaylist(ctx, keyofthebox),
+                      icon: Icon(
+                        Icons.delete_forever_outlined,
+                        color: Color.fromARGB(224, 255, 0, 0),
+                      ),
+                      label: Text('Delete',
+                          style: TextStyle(color: Colors.red, fontSize: 16))),
+                  Divider(
+                    thickness: 1,
+                  ),
+                ]),
+          ),
+        );
+      });
+}
+
+playlistVIDEOdelete(BuildContext ctx, nameofTheVideo, PlayListname) async {
+  showModalBottomSheet(
+      context: ctx,
+      builder: (ctx1) {
+        return Container(
+          height: 300,
+          color: Color.fromARGB(255, 214, 247, 255),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(0, 255, 0, 0),
+                          elevation: 0),
+                      onPressed: () => showAlertDialogDeleteForPlaylistVideos(
+                          ctx, nameofTheVideo, PlayListname),
+                      icon: Icon(
+                        Icons.delete_forever_outlined,
+                        color: Color.fromARGB(224, 255, 0, 0),
+                      ),
+                      label: Text('Delete',
+                          style: TextStyle(color: Colors.red, fontSize: 16))),
+                  Divider(
+                    thickness: 1,
+                  ),
                 ]),
           ),
         );

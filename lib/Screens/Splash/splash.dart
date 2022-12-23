@@ -9,16 +9,15 @@ import '../../DB/modelclass.dart';
 import '../../DB/videodata.dart';
 import '../../main.dart';
 import '../../navbar.dart';
-import '../Favorites/favorite_screen.dart';
 import '../PlayList/playlistmain.dart';
 
 // List <String> VideoTitles = [];
 // List <String>  VideoSize = [];
-List <String> VideoPath = [];
-List <dynamic> FavDB = [];
+List<String> VideoPath = [];
+List<dynamic> FavDB = [];
 // List <String> VideoDuration = [];
-Set  <String>  Videofolders = {};
- List fullvideo=[];
+Set<String> Videofolders = {};
+List fullvideo = [];
 List<VideoDatass> allvideos = [];
 List HPLN = [];
 // dynamic  datadata;
@@ -26,24 +25,22 @@ List HPLN = [];
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
 
-
   @override
   State<Splashscreen> createState() => _SplashscreenState();
-  
 }
- const MethodChannel _platform =
-      MethodChannel('search_files_in_storage/search');
+
+const MethodChannel _platform = MethodChannel('search_files_in_storage/search');
 
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     searchInStorage();
+    splashFetch();
     super.initState();
-   
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 4, 57, 87),
       body: Center(
@@ -67,17 +64,20 @@ class _SplashscreenState extends State<Splashscreen> {
 
   Future<void> GoToHome(BuildContext context) async {
     await Future<dynamic>.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
     );
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) =>  const NavBar(),
-    ));
+   Navigator. pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NavBar(),
+        ),
+      );
   }
 
   void searchInStorage() {
     _platform.invokeMethod('search').then(
-      ( value) {
-        final  res = value as String;
+      (value) {
+        final res = value as String;
         // log('<<$res>>');
 
         onSuccess(res);
@@ -88,13 +88,12 @@ class _SplashscreenState extends State<Splashscreen> {
   Future<void> splashFetch() async {
     if (await _requestPermission(Permission.storage)) {
       searchInStorage();
-    
     } else {
       splashFetch();
     }
   }
 
-   Future<bool> _requestPermission(Permission isPermission) async {
+  Future<bool> _requestPermission(Permission isPermission) async {
     const Permission store = Permission.storage;
     const Permission access = Permission.accessMediaLocation;
 
@@ -103,7 +102,7 @@ class _SplashscreenState extends State<Splashscreen> {
       return true;
     } else {
       final PermissionStatus result = await store.request();
-      final PermissionStatus oneresult = await access.request(); 
+      final PermissionStatus oneresult = await access.request();
 
       if (result == PermissionStatus.limited &&
           oneresult == PermissionStatus.limited) {
@@ -114,33 +113,38 @@ class _SplashscreenState extends State<Splashscreen> {
     }
   }
 
-  
-  
-   Future<void> onSuccess(String VideosDatass) async {
+  Future<void> onSuccess(String VideosDatass) async {
     final dynamic valueMap = jsonDecode(VideosDatass);
     final List<dynamic> Videolist = valueMap as List<dynamic>;
-
-   final Videolist2 = Videolist.map((dynamic e) {
-  
-    
-    // Videofiless = Videolist2 ;
+    final Videolist2 = Videolist.map((dynamic e) {
+      // Videofiless = Videolist2 ;
       return VideoListData.fromJson(e as Map<String, dynamic>);
     }).toList();
-    log('Function Working');
-     GoToHome(context);
-     allvideos = Videolist2.map((e) => VideoDatass(title: e.title!, folderName: e.folderName!, size: e.size!, duration: e.duration.toString(), path: e.path!, Date: e.Date!)).toList();
-     
-box.put('MyVideos', allvideos);
-// log('${}');
-   // ignore: unnecessary_brace_in_string_interps
-   log('${Videolist2[2].path}');
 
-fullvideo = box.get('MyVideos')!;
-// log('${fullvideo[5].title}');
-   Videofolders = fullvideo.map((e) => e.folderName.toString()).toList().toSet();
-  //  VideoTitles = Videolist2.map((e) => e.title.toString()).toList();
-// getFolderVideos(fullvideo.path);
-FavDB = box.get('MyFavVideo')!;
-Get_List_of_playlistNames = box.get('Playlistnamesss')!;
-}
+    allvideos = Videolist2.map((e) => VideoDatass(
+        title: e.title!,
+        folderName: e.folderName!,
+        size: e.size!,
+        duration: e.duration.toString(),
+        path: e.path!,
+        Date: e.Date!)).toList();
+
+    box.put('MyVideos', allvideos);
+    fullvideo = box.get('MyVideos')!;
+    Videofolders =
+        fullvideo.map((e) => e.folderName.toString()).toList().toSet();
+    final checkingkeys = box.keys.toList();
+    if (checkingkeys.contains('MyFavVideo')) {
+      FavDB = box.get('MyFavVideo')!;
+    } else {
+      box.put('MyFavVideo', FavDB);
+    }
+
+    if (checkingkeys.contains('AllPlayListNames')) {
+      Get_List_of_playlistNames = box.get('AllPlayListNames')!;
+    } else {
+      box.put('AllPlayListNames', Get_List_of_playlistNames);
+    }
+    GoToHome(context);
+  }
 }

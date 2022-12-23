@@ -1,12 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/widgets/bottomsheet.dart';
-import '../../main.dart';
-import '../Search/search.dart';
+import '../Search/searchdelegate.dart';
 import '../Settings/settings.dart';
 import '../Splash/splash.dart';
 import '../videoplaying screen/video_playing_screen.dart';
@@ -32,8 +29,8 @@ class _UserFavState extends State<UserFav> {
         body: Column(
           children: [
             Container(
-              height: 75.h,
-              width: 360.w,
+              height: MediaQuery.of(context).size.height/12,
+              width: double.infinity,
               color: const Color.fromARGB(255, 4, 57, 87),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,10 +57,8 @@ class _UserFavState extends State<UserFav> {
                   Padding(
                     padding: EdgeInsets.only(left: 97.w, top: 20.h),
                     child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SearchPage(),
-                          ));
+                        onPressed: (){
+                        showSearch(context: context, delegate: MySearch());
                         },
                         icon: Icon(
                           Icons.search,
@@ -136,13 +131,13 @@ class _UserFavState extends State<UserFav> {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                height: MediaQuery.of(context).size.height / 1.325,
+                height: MediaQuery.of(context).size.height / 1.29,
                 child: FavDB.isNotEmpty
                     ? ListView.separated(
                         padding: EdgeInsets.only(top: 15),
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          log('${FavDB.length}.................');
+                 
                           return ListTile(
                             onLongPress: () => setState(() {
                              showCustomBottomSheet(context, FavDB, index);
@@ -160,8 +155,8 @@ class _UserFavState extends State<UserFav> {
                               );
                             },
                             title: Text(FavDB[index].split('/').last),
-                            // leading: Thumbnail(VidPath:fullvideo[index].path.toString() ),
-                          );
+                            leading: Thumnailcontainer(VideoPath: FavDB[index], index: index));
+                      
                         },
                         separatorBuilder: (context, index) => Divider(),
                         itemCount: FavDB.length)

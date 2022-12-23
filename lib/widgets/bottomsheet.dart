@@ -1,28 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import '../Screens/Favorites/functions.dart';
 import '../Screens/PlayList/playlistmain.dart';
 import 'alertdialogues.dart';
 
-// class BottomSheetClass extends StatelessWidget {
-//    BottomSheetClass({super.key,required this.bottom,required this.intex, this.pathofvid,});
-
-// List bottom = [];
-//  int intex;
-//  String? pathofvid;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-// BottomSheetClass({required this.bottom,required this.intex, this.pathofvid,});
-List bottom = [];
-//  int intex;
 String? pathofvid;
 Favoritesfunctions fff = Favoritesfunctions();
 Future<void> showCustomBottomSheet(
@@ -30,7 +13,6 @@ Future<void> showCustomBottomSheet(
   bottom,
   index,
 ) async {
-  log('$index');
   showModalBottomSheet(
       context: ctx,
       builder: (ctx1) {
@@ -48,7 +30,10 @@ Future<void> showCustomBottomSheet(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                    onPressed: () => showAlertDialogDelete(ctx, bottom, index),
+                    onPressed: () => showAlertDialogDelete(
+                          ctx,
+                          bottom,
+                        ),
                     icon: Icon(
                       Icons.delete_forever_outlined,
                       color: Color.fromARGB(224, 255, 0, 0),
@@ -63,14 +48,10 @@ Future<void> showCustomBottomSheet(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
                     onPressed: () {
-                        log('$bottom 33333333333333');
                       PlaylistBottomSheet(
                         ctx,
                         bottom,
                       );
-                      // Navigator.pop(ctx);
-
-                      //  Navigator.of(ctx).pop();
                     },
                     icon: Icon(
                       Icons.list_alt_outlined,
@@ -88,17 +69,7 @@ Future<void> showCustomBottomSheet(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
                     onPressed: () {
-                      //  fv.AddFavv(index,fullvideo[index].path,);
-                      // log('$index');log('${fullFavVideo.length} print');
-                      // likedVideos =  fullvideo[index].path;
-                      //   log('$likedVideos');
-                      //    box.put("FavVideo", likedVideos);
-                      // fullFavVideo =   box.get('FavVideo')!;
-                      // log('0000000000000');
-                      // log('$fullFavVideo ');
                       fff.addtoFav(fullvideo[index].path);
-
-                      // Navigator.of(ctx).push(MaterialPageRoute(builder: (context) => Favoritemain(index: index, path: fullvideo[index].path, Title: fullvideo[index].title,),));
                     },
                     icon: Icon(
                       Icons.favorite_border,

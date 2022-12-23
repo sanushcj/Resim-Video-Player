@@ -1,19 +1,20 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../widgets/bottomsheet.dart';
+import 'package:resimvideoplayer/Screens/Home/folderScreen.dart';
+import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
 import '../All_Videos/all_videos.dart';
-import '../PlayList/playlistmain.dart';
-import '../Search/search.dart';
+import '../Search/searchdelegate.dart';
 import '../Settings/settings.dart';
 import '../Splash/splash.dart';
 
-class HomeScreen extends StatefulWidget {
-    HomeScreen({super.key, });
 
-List <dynamic> folderFetchedVideos = [];
+class HomeScreen extends StatefulWidget {
+  HomeScreen({
+    super.key,
+  });
+
+  List<dynamic> folderFetchedVideos = [];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              height: 75.h,
-              width: 360.w,
+              height: MediaQuery.of(context).size.height / 12,
+              width: double.infinity,
               color: const Color.fromARGB(255, 4, 57, 87),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,10 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.only(left: 124.w, top: 20.h),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SearchPage()));
-                          // )); builder: (context) =>           
-                                   
+                        showSearch(context: context, delegate: MySearch());
                         },
                         icon: Icon(
                           Icons.search,
@@ -140,23 +138,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height / 1.325,
+           height: MediaQuery.of(context).size.height / 1.29,
               child: ListView.separated(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => ListTile(
-                
-                  onTap: () => functionpathSplit(fullvideo[index].path),
+                  onTap: () {final myfoldervideos = getFolderVideos(Videofolders.elementAt(index));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => FolderOpenScreen(myfoldervideos: a ),));
+                  
+                  
+                  setState(() {
+                    
+                  });},
                   leading: Icon(
                     Icons.folder_outlined,
                     size: 40,
                   ),
-                   title: Text(Videofolders.elementAt(index)),
-                  
+                  title: Text(Videofolders.elementAt(index)),
                 ),
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: Videofolders.length,
-               
               ),
             ),
           ],
@@ -164,17 +165,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  
-   functionpathSplit(String path ) {
-    String a = path;
-    List<dynamic> b = a.split('/');
-    log(b.toString());
-    log('${b[b.length-2]}');
-    
-    // log('$folderFetchedVideos');
-    folderFetchedVideos =  b[b.length-2].toString() as Set<String>;
 
-   
-  }
-} 
-Set <String> folderFetchedVideos = {};
+  // functionpathSplit(String path) {
+  //   String a = path;
+  //   List<dynamic> b = a.split('/');
+  //   log(b.toString());
+  //   log('${b[b.length - 2]}');
+
+  //   // log('$folderFetchedVideos');
+  //   folderFetchedVideos = b[b.length - 2].toString() as Set<String>;
+  // }
+}
+
+// Set<String> folderFetchedVideos = {};

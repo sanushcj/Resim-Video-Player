@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Screens/Settings/privacypolicy.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -128,9 +129,9 @@ class SettingsPage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-              
+              Privacypolicy(context);
                         },
-                        child: Card(
+                        child: Card( 
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
