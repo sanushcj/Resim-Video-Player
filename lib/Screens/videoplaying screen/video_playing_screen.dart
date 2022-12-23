@@ -82,10 +82,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   @override
   void dispose() {
     videoPlayerController.dispose();
-
-    super.dispose();
-    _setAllOrientation();
+  _setAllOrientation();
     StatusBarHide();
+    _portraitMode();
+    super.dispose();
+  
   }
 
   @override
