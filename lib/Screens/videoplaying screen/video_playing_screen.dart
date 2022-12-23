@@ -51,6 +51,10 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
       ..setLooping(true)
       ..initialize().then((value) => setState(() {}));
   }
+    StatusBarHide() async {
+    Duration(seconds: 4);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  }
 
   String _videoDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
@@ -72,6 +76,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
     _playVideo();
     videoPlayerController.play();
     _setAllOrientation();
+    StatusBarHide();
   }
 
   @override
@@ -80,7 +85,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
     super.dispose();
     _setAllOrientation();
-    // StatusBarHide();
+    StatusBarHide();
   }
 
   @override
@@ -88,207 +93,210 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
     // int CurrentIndex = widget.Indexofvideo;
 
     return Scaffold(
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Color.fromARGB(255, 0, 0, 0),
-          child: videoPlayerController.value.isInitialized
-              ? Stack(
-                  // alignment: Alignment.center,
-                  children: [
-                    InkWell(
-                      onDoubleTap: () => videoPlayerController.value.isPlaying
-                          ? videoPlayerController.pause()
-                          : videoPlayerController.play(),
-                      // onTap: () => StatusBarHide(),
-                      child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(20),
-                          child: AspectRatio(
-                            aspectRatio:
-                                videoPlayerController.value.aspectRatio,
-                            child: VideoPlayer(videoPlayerController),
-                          )),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 70,
-                      color: Color.fromARGB(100, 0, 0, 0),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: () => Navigator.of(context).pop(true),
-                              icon: Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 250,
-                            child: MarqueeText(
-                              text: TextSpan(
-                                text: widget.VTitle,
-                              ),
-                              speed: 10,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.favorite,
-                                color: Colors.white,
-                              ))
-                        ],
+      body: SafeArea(
+        child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: Color.fromARGB(255, 0, 0, 0),
+            child: videoPlayerController.value.isInitialized
+                ? Stack(
+                    // alignment: Alignment.center,
+                    children: [
+                      InkWell(
+                        onDoubleTap: () => videoPlayerController.value.isPlaying
+                            ? videoPlayerController.pause()
+                            : videoPlayerController.play(),
+                        // onTap: () => StatusBarHide(),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(20),
+                            child: AspectRatio(
+                              aspectRatio:
+                                  videoPlayerController.value.aspectRatio,
+                              child: VideoPlayer(videoPlayerController),
+                            )),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 120,
+                      Container(
+                        width: double.infinity,
+                        height: 70,
                         color: Color.fromARGB(100, 0, 0, 0),
-                        child: Column(
+                        child: Row(
                           children: [
-                            Row(
-                              children: [
-                                ValueListenableBuilder(
-                                  valueListenable: videoPlayerController,
-                                  builder: ((context, VideoPlayerValue value,
-                                      child) {
-                                    return Text(
-                                      _videoDuration(value.position),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 13),
-                                    );
-                                  }),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    height: 40,
-                                    // decoration: BoxDecoration(border: Border.all() ),s
-                                    child: VideoProgressIndicator(
-                                        videoPlayerController,
-                                        colors: VideoProgressColors(
-                                            backgroundColor: Color.fromARGB(
-                                                14, 255, 255, 255),
-                                            playedColor: Color.fromARGB(
-                                                184, 125, 28, 229),
-                                            bufferedColor:
-                                                Color.fromARGB(0, 0, 0, 0)),
-                                        allowScrubbing: true,
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 15,
-                                          horizontal: 15,
-                                        )),
-                                  ),
-                                ),
-                                Text(
-                                  _videoDuration(
-                                      videoPlayerController.value.duration),
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 13),
-                                )
-                              ],
+                            IconButton(
+                                onPressed: () => Navigator.of(context).pop(true),
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.white,
+                                )),
+                            SizedBox(
+                              width: 10,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.lock_outline,
-                                      color: Colors.white,
-                                      size: 30,
-                                    )),
-                                IconButton(
-                                    onPressed: () {
-                                      if (videoPlayerController
-                                          .value.isPlaying) {
-                                        videoPlayerController.pause();
-                                      }
-                                      int newindex = widget.Indexofvideo--;
-                                      if (newindex >= 0) {
-                                        widget.VTitle =
-                                            fullvideo[newindex].title;
-                                        widget.VideoFetched =
-                                            fullvideo[newindex].path;
-                                        _playVideo();
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.skip_previous,
-                                      color: Colors.white,
-                                      size: 45,
-                                    )),
-                                IconButton(
-                                    onPressed: () =>
-                                        videoPlayerController.value.isPlaying
-                                            ? videoPlayerController.pause()
-                                            : videoPlayerController.play(),
-                                    icon: Icon(
-                                      videoPlayerController.value.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
-                                      color: Colors.white,
-                                      size: 45,
-                                    )),
-                                IconButton(
-                                    onPressed: () {
-                                      int newindex = widget.Indexofvideo++;
-                                      if (videoPlayerController
-                                          .value.isPlaying) {
-                                        videoPlayerController.pause();
-                                      }
-                                      if (newindex <= fullvideo.length) {
-                                        widget.VTitle =
-                                            fullvideo[newindex].title;
-                                        widget.VideoFetched =
-                                            fullvideo[newindex].path;
-                                        _playVideo();
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.skip_next,
-                                      color: Colors.white,
-                                      size: 45,
-                                    )),
-                                IconButton(
-                                    onPressed: () {
-                     
-                                      MediaQuery.of(context).orientation ==
-                                              Orientation.portrait
-                                          ? _landscapeMode()
-                                          : _portraitMode();
-                                    },
-                                    icon: MediaQuery.of(context).orientation ==
-                                            Orientation.portrait
-                                        ? Icon(
-                                            Icons.stay_current_landscape,
-                                            color: Colors.white,
-                                            size: 30,
-                                          )
-                                        : Icon(
-                                            Icons.stay_current_portrait,
-                                            color: Colors.white,
-                                            size: 30,
-                                          )),
-                              ],
-                            )
+                            Container(
+                              width: 250,
+                              child: MarqueeText(
+                                text: TextSpan(
+                                  text: widget.VTitle,
+                                ),
+                                speed: 10,
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                ))
                           ],
                         ),
                       ),
-                    ),
-                  ],
-                )
-              : Center(child: CircularProgressIndicator(color: Colors.white))),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 120,
+                          color: Color.fromARGB(100, 0, 0, 0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ValueListenableBuilder(
+                                    valueListenable: videoPlayerController,
+                                    builder: ((context, VideoPlayerValue value,
+                                        child) {
+                                      return Text(
+                                        _videoDuration(value.position),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 13),
+                                      );
+                                    }),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      height: 40,
+                                      // decoration: BoxDecoration(border: Border.all() ),s
+                                      child: VideoProgressIndicator(
+                                          videoPlayerController,
+                                          colors: VideoProgressColors(
+                                              backgroundColor: Color.fromARGB(
+                                                  14, 255, 255, 255),
+                                              playedColor: Color.fromARGB(
+                                                  184, 125, 28, 229),
+                                              bufferedColor:
+                                                  Color.fromARGB(0, 0, 0, 0)),
+                                          allowScrubbing: true,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 15,
+                                            horizontal: 15,
+                                          )),
+                                    ),
+                                  ),
+                                  Text(
+                                    _videoDuration(
+                                        videoPlayerController.value.duration),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 13),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.lock_outline,
+                                        color: Colors.white,
+                                        size: 30,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
+                                        if (videoPlayerController
+                                            .value.isPlaying) {
+                                          videoPlayerController.pause();
+                                        }
+                                        int newindex = widget.Indexofvideo--;
+                                        if (newindex >= 0) {
+                                          widget.VTitle =
+                                              fullvideo[newindex].title;
+                                          widget.VideoFetched =
+                                              fullvideo[newindex].path;
+                                          _playVideo();
+                                        }
+                                      },
+                                      icon: Icon(
+                                        Icons.skip_previous,
+                                        color: Colors.white,
+                                        size: 45,
+                                      )),
+                                  IconButton(
+                                      onPressed: () =>
+                                          videoPlayerController.value.isPlaying
+                                              ? videoPlayerController.pause()
+                                              : videoPlayerController.play(),
+                                      icon: Icon(
+                                        videoPlayerController.value.isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                        color: Colors.white,
+                                        size: 45,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
+                                        int newindex = widget.Indexofvideo++;
+                                        if (videoPlayerController
+                                            .value.isPlaying) {
+                                          videoPlayerController.pause();
+                                        }
+                                        if (newindex <= fullvideo.length) {
+                                          widget.VTitle =
+                                              fullvideo[newindex].title;
+                                          widget.VideoFetched =
+                                              fullvideo[newindex].path;
+                                          _playVideo();
+                                        }
+                                      },
+                                      icon: Icon(
+                                        Icons.skip_next,
+                                        color: Colors.white,
+                                        size: 45,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
+                       
+                                        MediaQuery.of(context).orientation ==
+                                                Orientation.portrait
+                                            ? _landscapeMode()
+                                            : _portraitMode();
+                                            StatusBarHide();
+                                      },
+                                      icon: MediaQuery.of(context).orientation ==
+                                              Orientation.portrait
+                                          ? Icon(
+                                              Icons.stay_current_landscape,
+                                              color: Colors.white,
+                                              size: 30,
+                                            )
+                                          : Icon(
+                                              Icons.stay_current_portrait,
+                                              color: Colors.white,
+                                              size: 30,
+                                            )),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Center(child: CircularProgressIndicator(color: Colors.white))),
+      ),
     );
   }
   
