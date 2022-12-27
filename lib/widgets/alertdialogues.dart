@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
@@ -16,19 +14,18 @@ showAlertDialogDeleteFavoriteVideos(BuildContext context, index,) {
   );
   Widget continueButton = TextButton(
       child: Text(
-        "Delete",
+        "Remove",
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-        log(FavDB[index]);
-        FavDB.remove(FavDB[index]);
+       FavDB.remove(FavDB[index]);
         Navigator.of(context).pop();
       });
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     content: Text(
-        "Are you sure do you want to delete ${FavDB[index].split('/').last} ?"),
+        "Are you sure do you want to Remove ${FavDB[index].split('/').last} ? "),
     actions: [
       cancelButton,
       continueButton,

@@ -1,31 +1,28 @@
 // ignore_for_file: always_specify_types, use_build_context_synchronously, non_constant_identifier_names
 
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:resimvideoplayer/DB/modelclass.dart';
+import 'package:resimvideoplayer/DB/videodata.dart';
 import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
+import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
+import 'package:resimvideoplayer/controller/favorite_controller.dart';
 import 'package:resimvideoplayer/controller/fullvideo_controller.dart';
 import 'package:resimvideoplayer/controller/homescreen_controller.dart';
-import '../../DB/modelclass.dart';
-import '../../DB/videodata.dart';
-import '../../main.dart';
-import '../../navbar.dart';
-import '../PlayList/playlistmain.dart';
+import 'package:resimvideoplayer/main.dart';
+import 'package:resimvideoplayer/navbar.dart';
+
 
 // List <String> VideoTitles = [];
 // List <String>  VideoSize = [];
 List<String> VideoPath = [];
-List<dynamic> FavDB = [];
 // List <String> VideoDuration = [];
-
-
 List<VideoDatass> allvideos = [];
 List HPLN = [];
 // dynamic  datadata;
-
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -39,12 +36,15 @@ const MethodChannel _platform = MethodChannel('search_files_in_storage/search');
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
-        splashFetch();
+    splashFetch();
     searchInStorage();
     super.initState();
   }
-final allVideosController allVideosupdater = Get.put(allVideosController()); 
+
+  final allVideosController allVideosupdater = Get.put(allVideosController());
   final HomeScreenController Homecontroller = Get.put(HomeScreenController());
+  final favoriteController FavoriteController = Get.put(favoriteController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,21 +70,18 @@ final allVideosController allVideosupdater = Get.put(allVideosController());
   }
 
   Future<void> GoToHome(BuildContext context) async {
-        log("fsfffffffffffffffffffffffffffffffffffff");
-
     await Future<dynamic>.delayed(
       const Duration(seconds: 2),
     );
-   Navigator. pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NavBar(),
-        ),
-      );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NavBar(),
+      ),
+    );
   }
 
   void searchInStorage() {
-
     _platform.invokeMethod('search').then(
       (value) {
         final res = value as String;
@@ -124,7 +121,6 @@ final allVideosController allVideosupdater = Get.put(allVideosController());
   }
 
   Future<void> onSuccess(String VideosDatass) async {
-
     final dynamic valueMap = jsonDecode(VideosDatass);
     final List<dynamic> Videolist = valueMap as List<dynamic>;
     final Videolist2 = Videolist.map((dynamic e) {
@@ -142,13 +138,15 @@ final allVideosController allVideosupdater = Get.put(allVideosController());
 
     box.put('MyVideos', allvideos);
     allvideosControlleerr.fullvideo = box.get('MyVideos')!;
-   Homecontroller. Videofolders =
-        allvideosControlleerr.fullvideo.map((e) => e.folderName.toString()).toList().toSet();
+    Homecontroller.Videofolders = allvideosControlleerr.fullvideo
+        .map((e) => e.folderName.toString())
+        .toList()
+        .toSet();
     final checkingkeys = box.keys.toList();
     if (checkingkeys.contains('MyFavVideo')) {
-      FavDB = box.get('MyFavVideo')!;
+     FavoriteController.FavDB  = box.get('MyFavVideo')!;
     } else {
-      box.put('MyFavVideo', FavDB);
+      box.put('MyFavVideo', FavoriteController.FavDB);
     }
 
     if (checkingkeys.contains('AllPlayListNames')) {
