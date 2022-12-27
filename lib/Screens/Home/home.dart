@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height/1.33,
+              height: MediaQuery.of(context).size.height/1.30,
               child: GetBuilder<HomeScreenController>(
                 builder: (controller) {
                   return  ListView.separated(

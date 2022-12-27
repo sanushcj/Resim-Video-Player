@@ -83,11 +83,13 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
   @override
   void dispose() {
+  super.dispose();
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     videoPlayerController.dispose();
   _setAllOrientation();
     _portraitMode();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-    super.dispose();
+  
+  
   
   }
 
