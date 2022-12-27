@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
+import 'package:resimvideoplayer/navbar.dart';
 import 'package:video_player/video_player.dart';
 
 // ignore: must_be_immutable
@@ -83,8 +85,8 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   void dispose() {
     videoPlayerController.dispose();
   _setAllOrientation();
-    StatusBarHide();
     _portraitMode();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     super.dispose();
   
   }
@@ -126,7 +128,7 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                         child: Row(
                           children: [
                             IconButton(
-                                onPressed: () => Navigator.of(context).pop(true),
+                                onPressed: () => Get.offAll(NavBar()),
                                 icon: Icon(
                                   Icons.arrow_back_ios,
                                   color: Colors.white,

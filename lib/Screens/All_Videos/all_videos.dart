@@ -23,6 +23,7 @@ class _AllVideosState extends State<AllVideos> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         backgroundColor: const Color.fromARGB(255, 4, 57, 87),
         body: Column(
           children: [
@@ -32,7 +33,7 @@ class _AllVideosState extends State<AllVideos> {
                     color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
-                height: MediaQuery.of(context).size.height / 1.33,
+                height: MediaQuery.of(context).size.height/1.33,
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 15),
                   physics: BouncingScrollPhysics(),

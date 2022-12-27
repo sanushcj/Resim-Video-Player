@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:resimvideoplayer/controller/homescreen_controller.dart';
 import '../../DB/modelclass.dart';
 import '../../DB/videodata.dart';
 import '../../main.dart';
@@ -16,11 +18,12 @@ import '../PlayList/playlistmain.dart';
 List<String> VideoPath = [];
 List<dynamic> FavDB = [];
 // List <String> VideoDuration = [];
-Set<String> Videofolders = {};
+
 List fullvideo = [];
 List<VideoDatass> allvideos = [];
 List HPLN = [];
 // dynamic  datadata;
+
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -34,10 +37,12 @@ const MethodChannel _platform = MethodChannel('search_files_in_storage/search');
 class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
+        splashFetch();
     searchInStorage();
-    splashFetch();
     super.initState();
   }
+
+  final HomeScreenController Homecontroller = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +68,10 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Future<void> GoToHome(BuildContext context) async {
+        log("fsfffffffffffffffffffffffffffffffffffff");
+
     await Future<dynamic>.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
     );
    Navigator. pushReplacement(
         context,
@@ -75,6 +82,7 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   void searchInStorage() {
+
     _platform.invokeMethod('search').then(
       (value) {
         final res = value as String;
@@ -114,6 +122,7 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Future<void> onSuccess(String VideosDatass) async {
+
     final dynamic valueMap = jsonDecode(VideosDatass);
     final List<dynamic> Videolist = valueMap as List<dynamic>;
     final Videolist2 = Videolist.map((dynamic e) {
@@ -131,7 +140,7 @@ class _SplashscreenState extends State<Splashscreen> {
 
     box.put('MyVideos', allvideos);
     fullvideo = box.get('MyVideos')!;
-    Videofolders =
+   Homecontroller. Videofolders =
         fullvideo.map((e) => e.folderName.toString()).toList().toSet();
     final checkingkeys = box.keys.toList();
     if (checkingkeys.contains('MyFavVideo')) {

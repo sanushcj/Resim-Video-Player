@@ -3,6 +3,7 @@
 
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:resimvideoplayer/Colors/mycolors.dart';
 import 'Screens/All_Videos/all_videos.dart';
 import 'Screens/Home/home.dart';
 import 'Screens/Favorites/favorite_screen.dart';
@@ -32,12 +33,11 @@ class _NavBarState extends State<NavBar> {
       //    _currentselectionIndex = widget.currentselectionIndexAllvideos;
       //  } // log('<<<<<<<<<<<<<<<<<<<<<ssss<<<<<<<<<<<<<<<<<<<<<<<<<<,${widget.videodatasss}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.');
     return Scaffold(
-      extendBody: true,
-      backgroundColor: const Color.fromARGB(255, 4, 57, 87),
+      backgroundColor:MainTheme,
       body: _pages[_currentselectionIndex],
       bottomNavigationBar: FloatingNavbar(
         iconSize: 30,
-        backgroundColor: const Color.fromARGB(255, 4, 57, 87),
+        backgroundColor: MainTheme,
         // fixedColor: Colors.white,
         unselectedItemColor: const Color.fromARGB(255, 167, 183, 188),
         // showSelectedLabels: false,
