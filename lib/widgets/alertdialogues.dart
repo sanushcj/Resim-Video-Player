@@ -1,13 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/main.dart';
 import '../Screens/PlayList/SeparatePlaylist.dart';
 
-
-showAlertDialogDelete(
-  BuildContext context,
-   bottom,
-) {
+showAlertDialogDeleteFavoriteVideos(BuildContext context, index,) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text("Cancel"),
@@ -21,14 +20,15 @@ showAlertDialogDelete(
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-        // fullvideo.remove(bottom);
+        log(FavDB[index]);
+        FavDB.remove(FavDB[index]);
         Navigator.of(context).pop();
       });
 
   // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
+  AlertDialog alert = AlertDialog(
     content: Text(
-        "Are you sure do you want to delete ${bottom.split('/').last} ?"),
+        "Are you sure do you want to delete ${FavDB[index].split('/').last} ?"),
     actions: [
       cancelButton,
       continueButton,
@@ -62,12 +62,11 @@ showAlertDialogDeleteForPlaylist(
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-   
- if (box.containsKey(nameoftheplaylist)) {
-    box.delete(nameoftheplaylist);
-  }
-  Get_List_of_playlistNames.remove(nameoftheplaylist);
- Get_List_of_playlistNames = box.get('Playlistnamesss')!;
+        if (box.containsKey(nameoftheplaylist)) {
+          box.delete(nameoftheplaylist);
+        }
+        Get_List_of_playlistNames.remove(nameoftheplaylist);
+        Get_List_of_playlistNames = box.get('Playlistnamesss')!;
         Navigator.of(context).pop();
       });
 
@@ -89,14 +88,8 @@ showAlertDialogDeleteForPlaylist(
   );
 }
 
-
-
-
-
 showAlertDialogDeleteForPlaylistVideos(
-  BuildContext context,
-  String nameofTheVideo,PlayListname
-) {
+    BuildContext context, String nameofTheVideo, PlayListname) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text("Cancel"),
@@ -110,17 +103,17 @@ showAlertDialogDeleteForPlaylistVideos(
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
- 
-final playlist =box.get(PlayListname);
-playlist!.remove(nameofTheVideo);
-box.put(PlayListname, playlist);
-VideosinPlayList = box.get(PlayListname)!;
-   Navigator.of(context).pop();
+        final playlist = box.get(PlayListname);
+        playlist!.remove(nameofTheVideo);
+        box.put(PlayListname, playlist);
+        VideosinPlayList = box.get(PlayListname)!;
+        Navigator.of(context).pop();
       });
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: Text("Are you sure do you want to delete ${nameofTheVideo.split('/').last} ?"),
+    content: Text(
+        "Are you sure do you want to delete ${nameofTheVideo.split('/').last} ?"),
     actions: [
       cancelButton,
       continueButton,
@@ -135,4 +128,3 @@ VideosinPlayList = box.get(PlayListname)!;
     },
   );
 }
-

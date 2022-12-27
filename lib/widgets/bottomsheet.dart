@@ -23,7 +23,7 @@ Future<void> showCustomBottomSheet(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
+             //mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -31,9 +31,9 @@ Future<void> showCustomBottomSheet(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
-                    onPressed: () => showAlertDialogDelete(
+                    onPressed: () => showAlertDialogDeleteFavoriteVideos(
                           ctx,
-                          bottom,
+                           index,
                         ),
                     icon: Icon(
                       Icons.delete_forever_outlined,
