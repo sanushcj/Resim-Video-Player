@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
+import 'package:resimvideoplayer/controller/fullvideo_controller.dart';
 import 'package:resimvideoplayer/controller/homescreen_controller.dart';
 import '../../DB/modelclass.dart';
 import '../../DB/videodata.dart';
@@ -41,7 +43,7 @@ class _SplashscreenState extends State<Splashscreen> {
     searchInStorage();
     super.initState();
   }
-
+final allVideosController allVideosupdater = Get.put(allVideosController()); 
   final HomeScreenController Homecontroller = Get.put(HomeScreenController());
 
   @override
@@ -139,9 +141,9 @@ class _SplashscreenState extends State<Splashscreen> {
         Date: e.Date!)).toList();
 
     box.put('MyVideos', allvideos);
-    fullvideo = box.get('MyVideos')!;
+    allvideosControlleerr.fullvideo = box.get('MyVideos')!;
    Homecontroller. Videofolders =
-        fullvideo.map((e) => e.folderName.toString()).toList().toSet();
+        allvideosControlleerr.fullvideo.map((e) => e.folderName.toString()).toList().toSet();
     final checkingkeys = box.keys.toList();
     if (checkingkeys.contains('MyFavVideo')) {
       FavDB = box.get('MyFavVideo')!;

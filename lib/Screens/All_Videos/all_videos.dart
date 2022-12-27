@@ -6,20 +6,13 @@ import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/controller/fullvideo_controller.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
 import 'package:resimvideoplayer/widgets/bottomsheet.dart';
-import '../Splash/splash.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
-class AllVideos extends StatefulWidget {
+class AllVideos extends StatelessWidget {
   AllVideos({super.key});
 
-  @override
-  State<AllVideos> createState() => _AllVideosState();
-}
-
-class _AllVideosState extends State<AllVideos> {
   // BottomSheetClass obj = BottomSheetClass();
   List<dynamic> thumnailsss = [];
-
 // SortFunctions functionnn = SortFunctions();
   @override
   Widget build(BuildContext context) {
@@ -36,7 +29,7 @@ class _AllVideosState extends State<AllVideos> {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
                 height: MediaQuery.of(context).size.height/1.30,
-                child: GetBuilder<allVideos>(
+                child: GetBuilder<allVideosController>(
                   builder: (Controller) {
                     return ListView.separated(
                       padding: EdgeInsets.only(top: 15),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/Screens/videoplaying%20screen/video_playing_screen.dart';
 
@@ -64,7 +65,7 @@ class MySearch extends SearchDelegate<dynamic> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final List<dynamic> searched = fullvideo
+    final List<dynamic> searched = allvideosControlleerr.fullvideo
         .map((e) => e.path)
         .toList()
         .where(
@@ -143,7 +144,7 @@ class MySearch extends SearchDelegate<dynamic> {
 // search element
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<dynamic> searched = fullvideo
+    final List<dynamic> searched = allvideosControlleerr.fullvideo
         .map((e) => e.path)
         .toList()
         .where(

@@ -57,7 +57,7 @@ class Thumnailcontainer extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: const DecorationImage(
-                              image: AssetImage('assets/img/img_462420.png'),
+                              image: AssetImage('assets/img/ios loading.jpg'),
                               fit: BoxFit.cover),
                         ),
                       );

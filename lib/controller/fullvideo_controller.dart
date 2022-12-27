@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class allVideos extends GetxController {
+class allVideosController extends GetxController {
 
 List fullvideo = [].obs;
 

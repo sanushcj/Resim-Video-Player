@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:marquee_text/marquee_text.dart';
+import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
 import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/navbar.dart';
 import 'package:video_player/video_player.dart';
@@ -228,9 +229,9 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                         int newindex = widget.Indexofvideo--;
                                         if (newindex >= 0) {
                                           widget.VTitle =
-                                              fullvideo[newindex].title;
+                                              allvideosControlleerr.fullvideo[newindex].title;
                                           widget.VideoFetched =
-                                              fullvideo[newindex].path;
+                                              allvideosControlleerr.fullvideo[newindex].path;
                                           _playVideo();
                                         }
                                       },
@@ -258,11 +259,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                             .value.isPlaying) {
                                           videoPlayerController.pause();
                                         }
-                                        if (newindex <= fullvideo.length) {
+                                        if (newindex <= allvideosControlleerr.fullvideo.length) {
                                           widget.VTitle =
-                                              fullvideo[newindex].title;
+                                              allvideosControlleerr.fullvideo[newindex].title;
                                           widget.VideoFetched =
-                                              fullvideo[newindex].path;
+                                              allvideosControlleerr.fullvideo[newindex].path;
                                           _playVideo();
                                         }
                                       },
