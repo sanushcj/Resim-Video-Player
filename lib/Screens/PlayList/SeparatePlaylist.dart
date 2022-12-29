@@ -1,18 +1,19 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
 
 
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
+import 'package:get/get.dart';
+import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
+import 'package:resimvideoplayer/Screens/PlayList/playlist_screen.dart';
+import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/Screens/videoplaying%20screen/video_playing_screen.dart';
+import 'package:resimvideoplayer/controller/playlist_controller.dart';
 import 'package:resimvideoplayer/main.dart';
+import 'package:resimvideoplayer/navbar.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
 
-import '../../navbar.dart';
-import '../Settings/settings.dart';
-import '../Thumbnail/thumnail.dart';
-
-List VideosinPlayList = [];
 
 class InsidePlayList extends StatelessWidget {
   InsidePlayList({
@@ -25,9 +26,9 @@ class InsidePlayList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (box.containsKey(boxkey)) {
-      VideosinPlayList = box.get(boxkey)!;
+      PlayListControllerUpdater. VideosinPlayList = box.get(boxkey)!;
     }else{
-      VideosinPlayList.clear();
+     PlayListControllerUpdater. VideosinPlayList.clear();
     }
     return SafeArea(
       child: Scaffold(
@@ -78,54 +79,52 @@ class InsidePlayList extends StatelessWidget {
                     ),
                   ),
                   // ignore: unnecessary_null_comparison
-                  VideosinPlayList.isEmpty
-                      ? Center(
-                          child: Text('Add Videos'),
-                        )
-                      : SizedBox(
-                          height: MediaQuery.of(context).size.height / 1.33,
-                          child: ListView.separated(
-                            padding: EdgeInsets.only(top: 15),
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              // functionnn.assendingorder();
-                              // abc.sort((a, b) => a.length.compareTo(b.length));
-                              // log('$abc after sorting');
+                  GetBuilder<PlayList_Controller>(
+                    builder: (Controller) {
+                      return PlayListControllerUpdater.VideosinPlayList.isEmpty
+                          ? Center(
+                              child: Text('Add Videos'),
+                            )
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height / 1.30,
+                              child: ListView.separated(
+                                padding: EdgeInsets.only(top: 15),
+                                physics: BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    onTap: () => Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => VideoPlayerPage(
+                                          VideoFetched: PlayListControllerUpdater.VideosinPlayList[index],
+                                          VTitle: PlayListControllerUpdater.VideosinPlayList[index]
+                                              .split('/')
+                                              .last,
+                                          Indexofvideo: index),
+                                    )),
+                                    onLongPress: () =>    Controller.playlistVIDEOdelete(
+                                        context, PlayListControllerUpdater.VideosinPlayList[index], boxkey),
 
-                              //  fullvideo.sort((a, b) => a.length.compareTo(b.length));
-                              // log('message');
-                              return ListTile(
-                                onTap: () => Navigator.of(context)
-                                    .push(MaterialPageRoute(
-                                  builder: (context) => VideoPlayerPage(
-                                      VideoFetched: VideosinPlayList[index],
-                                      VTitle: VideosinPlayList[index]
-                                          .split('/')
-                                          .last,
-                                      Indexofvideo: index),
-                                )),
-                                onLongPress: () => playlistVIDEOdelete(
-                                    context, VideosinPlayList[index], boxkey),
+                                    title: Container(
+                                      width: double.infinity,
+                                      child: Text(
+                                       PlayListControllerUpdater. VideosinPlayList[index].split('/').last,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Color.fromARGB(255, 0, 0, 0)),
+                                      ),
+                                    ),
 
-                                title: Container(
-                                  width: double.infinity,
-                                  child: Text(
-                                    VideosinPlayList[index].split('/').last,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        color: Color.fromARGB(255, 0, 0, 0)),
-                                  ),
-                                ),
-
-                                leading: Thumnailcontainer(
-                                    VideoPath: VideosinPlayList[index],
-                                    index: index),
-                              );
-                            },
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: VideosinPlayList.length,
-                          )),
+                                    leading: Thumnailcontainer(
+                                        VideoPath: PlayListControllerUpdater.VideosinPlayList[index],
+                                        index: index),
+                                  );
+                                },
+                                separatorBuilder: (context, index) => Divider(),
+                                itemCount: PlayListControllerUpdater.VideosinPlayList.length,
+                              ));
+                    }
+                  ),
                 ],
               ),
             )

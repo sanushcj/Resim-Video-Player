@@ -1,15 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:resimvideoplayer/main.dart';
 
-import '../../widgets/alertdialogues.dart';
-import 'SeparatePlaylist.dart';
-
+class PlayList_Controller extends GetxController {
+  
 final playlistname_Controller = TextEditingController();
+List Get_List_of_playlistNames = [].obs;
+List VideosinPlayList = [].obs;
 
-List Get_List_of_playlistNames = [];
+
+GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
 CreatingPlayList(TextEditingController newplaylistname) async {
   final Playlistname = newplaylistname.text.trim();
   Get_List_of_playlistNames.add(Playlistname);
@@ -32,20 +34,34 @@ showAlertDialogPlayList(
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-        CreatingPlayList(playlistname_Controller);
-        Navigator.of(context).pop();
+     
+          CreatingPlayList(playlistname_Controller);
+          playlistname_Controller.clear();
+          Navigator.of(context).pop();
+        
+
         // log('${newplaylistname.text.trim()}');
       });
   Widget playlistform = Form(
-      child: TextField(
-    controller: playlistname_Controller,
-    decoration: const InputDecoration(
-      border: OutlineInputBorder(),
-      hintText: 'Enter playlist Name',
-      fillColor: Color.fromARGB(145, 255, 255, 255),
-      filled: true,
+    key: formkey,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (Get_List_of_playlistNames.contains(value)) {
+          return 'This name is already exist Try another name';
+        }
+        return '';
+      },
+      controller: playlistname_Controller,
+      decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: 'Enter Playlist Name',
+          fillColor: Color.fromARGB(145, 255, 255, 255),
+          filled: true,
+          labelText: 'Enter PlayListName'),
     ),
-  ));
+  );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
@@ -133,6 +149,7 @@ PlaylistBottomSheet(
           ),
         );
       });
+      update();
 }
 
 playlistChecking(String Keyyy, String Video) {
@@ -141,7 +158,6 @@ playlistChecking(String Keyyy, String Video) {
     VideosinPlayList = box.get(Keyyy)!;
     VideosinPlayList.add(Video);
     box.put(Keyyy, VideosinPlayList);
-    log('Video in plaulistytttt $VideosinPlayList');
   } else {
     VideosinPlayList.clear();
     VideosinPlayList.add(Video);
@@ -222,4 +238,95 @@ playlistVIDEOdelete(BuildContext ctx, nameofTheVideo, PlayListname) async {
           ),
         );
       });
+}
+
+showAlertDialogDeleteForPlaylist(
+  BuildContext context,
+  String nameoftheplaylist,
+) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continueButton = TextButton(
+      child: Text(
+        "Delete",
+        style: TextStyle(color: Colors.red),
+      ),
+      onPressed: () {
+        if (box.containsKey(nameoftheplaylist)) {
+          box.delete(nameoftheplaylist);
+        }
+        Get_List_of_playlistNames.remove(nameoftheplaylist);
+        Get_List_of_playlistNames = box.get('Playlistnamesss')!;
+        Navigator.of(context).pop();
+      });
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: Text("Are you sure do you want to delete ${nameoftheplaylist} ?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+  update();
+}
+
+showAlertDialogDeleteForPlaylistVideos(
+    BuildContext context, String nameofTheVideo, PlayListname) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continueButton = TextButton(
+      child: Text(
+        "Delete",
+        style: TextStyle(color: Colors.red),
+      ),
+      onPressed: () {
+        final playlist = box.get(PlayListname);
+        playlist!.remove(nameofTheVideo);
+        box.put(PlayListname, playlist);
+        VideosinPlayList = box.get(PlayListname)!;
+        Navigator.of(context).pop();
+      });
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: Text(
+        "Are you sure do you want to delete ${nameofTheVideo.split('/').last} ?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+    update();
+}
+
+
+
+
 }

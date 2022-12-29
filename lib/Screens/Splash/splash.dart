@@ -8,10 +8,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:resimvideoplayer/DB/modelclass.dart';
 import 'package:resimvideoplayer/DB/videodata.dart';
 import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
-import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
 import 'package:resimvideoplayer/controller/favorite_controller.dart';
 import 'package:resimvideoplayer/controller/fullvideo_controller.dart';
 import 'package:resimvideoplayer/controller/homescreen_controller.dart';
+import 'package:resimvideoplayer/controller/playlist_controller.dart';
 import 'package:resimvideoplayer/main.dart';
 import 'package:resimvideoplayer/navbar.dart';
 
@@ -41,10 +41,11 @@ class _SplashscreenState extends State<Splashscreen> {
     super.initState();
   }
 
-  final allVideosController allVideosupdater = Get.put(allVideosController());
+
+      final allVideosController allVideosupdater = Get.put(allVideosController());
   final HomeScreenController Homecontroller = Get.put(HomeScreenController());
   final favoriteController FavoriteController = Get.put(favoriteController());
-
+    PlayList_Controller PlaylistUpdater = Get.put(PlayList_Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -150,9 +151,9 @@ class _SplashscreenState extends State<Splashscreen> {
     }
 
     if (checkingkeys.contains('AllPlayListNames')) {
-      Get_List_of_playlistNames = box.get('AllPlayListNames')!;
+     PlaylistUpdater. Get_List_of_playlistNames = box.get('AllPlayListNames')!;
     } else {
-      box.put('AllPlayListNames', Get_List_of_playlistNames);
+      box.put('AllPlayListNames',   PlaylistUpdater.Get_List_of_playlistNames);
     }
     GoToHome(context);
   }

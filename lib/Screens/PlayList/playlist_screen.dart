@@ -2,20 +2,16 @@
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:resimvideoplayer/Screens/PlayList/SeparatePlaylist.dart';
+import 'package:resimvideoplayer/controller/playlist_controller.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
-import '../Settings/settings.dart';
-import 'playlistmain.dart';
 
-class PlaylistPage extends StatefulWidget {
+final PlayList_Controller PlayListControllerUpdater = Get.find();
+
+class PlaylistPage extends StatelessWidget {
   PlaylistPage({super.key});
 
-  @override
-  State<PlaylistPage> createState() => _PlaylistPageState();
-}
-
-class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,7 +42,8 @@ class _PlaylistPageState extends State<PlaylistPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            showAlertDialogPlayList(context);
+                            PlayListControllerUpdater.showAlertDialogPlayList(
+                                context);
                           },
                           child: Container(
                             margin:
@@ -75,44 +72,56 @@ class _PlaylistPageState extends State<PlaylistPage> {
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 1.29,
-                            child: Get_List_of_playlistNames.isNotEmpty
-                                ? GridView.builder(
-                                    itemCount: Get_List_of_playlistNames.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
-                                    itemBuilder: (context, index) => InkWell(
-                                      onLongPress: () {
-                                        playlistDelete(context,
-                                            Get_List_of_playlistNames[index]);
-                                      },
-                                      onTap: () => Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => InsidePlayList(
-                                            boxkey: Get_List_of_playlistNames[
-                                                index]),
-                                      )),
-                                      child: Card(
-                                        color: Colors.primaries[Random()
-                                            .nextInt(
-                                                Colors.primaries.length)][300],
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Center(
-                                                child: Text(
-                                              Get_List_of_playlistNames[index],
-                                              style: TextStyle(fontSize: 20),
-                                            ))
-                                          ],
+                            child: GetBuilder<PlayList_Controller>(
+                                builder: (Controller) {
+                              return Controller
+                                      .Get_List_of_playlistNames.isNotEmpty
+                                  ? GridView.builder(
+                                      itemCount: Controller
+                                          .Get_List_of_playlistNames.length,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemBuilder: (context, index) => InkWell(
+                                        onLongPress: () {
+                                          Controller.playlistDelete(
+                                              context,
+                                              Controller
+                                                      .Get_List_of_playlistNames[
+                                                  index]);
+                                        },
+                                        onTap: () => Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => InsidePlayList(
+                                              boxkey: Controller
+                                                      .Get_List_of_playlistNames[
+                                                  index]),
+                                        )),
+                                        child: Card(
+                                          color: Colors.primaries[Random()
+                                                  .nextInt(
+                                                      Colors.primaries.length)]
+                                              [300],
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Center(
+                                                  child: Text(
+                                                Controller
+                                                        .Get_List_of_playlistNames[
+                                                    index],
+                                                style: TextStyle(fontSize: 20),
+                                              ))
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                : Center(
-                                    child: Text('Create new Playlist'),
-                                  )),
+                                    )
+                                  : Center(
+                                      child: Text('Create new Playlist'),
+                                    );
+                            })),
                         Divider(
                           thickness: 1,
                         )

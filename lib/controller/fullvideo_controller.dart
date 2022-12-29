@@ -4,6 +4,4 @@ class allVideosController extends GetxController {
 
 List fullvideo = [].obs;
 
-  
-  
 }

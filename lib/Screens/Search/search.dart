@@ -1,9 +1,8 @@
 // ignore_for_file: always_specify_types
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
-import '../Settings/settings.dart';
+
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

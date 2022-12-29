@@ -27,42 +27,40 @@ class UserFav extends StatelessWidget {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
                 height: MediaQuery.of(context).size.height / 1.30,
-                child: favControllerUpdater.FavDB.isNotEmpty
-                    ?  GetBuilder<favoriteController>(
-                      builder: (controller) {
-                        return ListView.separated(
-                            padding: EdgeInsets.only(top: 15),
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                  onLongPress: () => showCustomBottomSheet(
-                                      context, controller.FavDB, index),
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) => VideoPlayerPage(
-                                          VideoFetched: controller.FavDB[index],
-                                          VTitle: (controller.FavDB[index]
-                                              .split('/')
-                                              .last),
-                                          Indexofvideo: index,
-                                        ),
+                child: GetBuilder<favoriteController>(builder: (controller) {
+                  return favControllerUpdater.FavDB.isNotEmpty
+                      ? ListView.separated(
+                          padding: EdgeInsets.only(top: 15),
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                                onLongPress: () => showCustomBottomSheet(
+                                    context, controller.FavDB, index),
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => VideoPlayerPage(
+                                        VideoFetched: controller.FavDB[index],
+                                        VTitle: (controller.FavDB[index]
+                                            .split('/')
+                                            .last),
+                                        Indexofvideo: index,
                                       ),
-                                    );
-                                  },
-                                  title:
-                                      Text(controller.FavDB[index].split('/').last),
-                                  leading: Thumnailcontainer(
-                                      VideoPath: controller.FavDB[index],
-                                      index: index));
-                            },
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: controller.FavDB.length);
-                      }
-                    )
-                    : Center(
-                        child: Text('Add Favorite Videos'),
-                      )),
+                                    ),
+                                  );
+                                },
+                                title: Text(
+                                    controller.FavDB[index].split('/').last),
+                                leading: Thumnailcontainer(
+                                    VideoPath: controller.FavDB[index],
+                                    index: index));
+                          },
+                          separatorBuilder: (context, index) => Divider(),
+                          itemCount: controller.FavDB.length)
+                      : Center(
+                          child: Text('Add Favorite Videos'),
+                        );
+                })),
           ],
         ),
       ),
