@@ -1,12 +1,17 @@
 import 'package:get/get.dart';
-import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/main.dart';
 
 class  favoriteController extends GetxController{
 List<dynamic> Fav = [];
 
-List <dynamic> FavDB = FavDB[].obs
+List <dynamic> FavDB = [].obs; 
  
+
+DeleteFav(index){
+FavDB.remove(FavDB[index]);
+  update();
+}
+
   addtoFav(
     path,
   ) {

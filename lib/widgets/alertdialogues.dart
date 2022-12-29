@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
 import 'package:resimvideoplayer/Screens/PlayList/playlistmain.dart';
-import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/main.dart';
 import '../Screens/PlayList/SeparatePlaylist.dart';
 
@@ -18,14 +18,14 @@ showAlertDialogDeleteFavoriteVideos(BuildContext context, index,) {
         style: TextStyle(color: Colors.red),
       ),
       onPressed: () {
-       FavDB.remove(FavDB[index]);
+       favControllerUpdater.DeleteFav(index);
         Navigator.of(context).pop();
       });
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     content: Text(
-        "Are you sure do you want to Remove ${FavDB[index].split('/').last} ? "),
+        "Are you sure do you want to Remove ${favControllerUpdater.FavDB[index].split('/').last} ? "),
     actions: [
       cancelButton,
       continueButton,

@@ -68,7 +68,7 @@ Future<void> showCustomBottomSheet(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
                     onPressed: () {
-                     favController.addtoFav(allvideosControlleerr.fullvideo[index].path);
+                     favControllerUpdater.addtoFav(allvideosControlleerr.fullvideo[index].path);
                     },
                     icon: Icon(
                       Icons.favorite_border,
