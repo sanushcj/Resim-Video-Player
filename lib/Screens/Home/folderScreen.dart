@@ -1,13 +1,10 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, always_specify_types, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:resimvideoplayer/Colors/mycolors.dart';
 import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
 import '../All_Videos/all_videos.dart';
-import '../Search/searchdelegate.dart';
-import '../Settings/settings.dart';
 import '../videoplaying screen/video_playing_screen.dart';
 
 class FolderOpenScreen extends StatefulWidget {

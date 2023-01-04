@@ -71,7 +71,9 @@ android {
    }
    buildTypes {
        release {
-           signingConfig signingConfigs.release
+        shrinkResources false  //add this line
+        minifyEnabled false //add this line
+        signingConfig signingConfigs.release
        }
    }
 

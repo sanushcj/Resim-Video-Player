@@ -1,4 +1,4 @@
-// ignore_for_file: always_specify_types
+// ignore_for_file: always_specify_types, must_be_immutable
 
 
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';

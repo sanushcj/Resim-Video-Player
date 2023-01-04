@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
-import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/navbar.dart';
 import 'package:video_player/video_player.dart';
 

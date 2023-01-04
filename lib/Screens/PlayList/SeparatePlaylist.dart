@@ -5,7 +5,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
 import 'package:resimvideoplayer/Screens/PlayList/playlist_screen.dart';
 import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
 import 'package:resimvideoplayer/Screens/videoplaying%20screen/video_playing_screen.dart';
