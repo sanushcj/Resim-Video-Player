@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:resimvideoplayer/Screens/Favorites/favorite_screen.dart';
-import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
 import 'package:resimvideoplayer/Screens/PlayList/playlist_screen.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'alertdialogues.dart';
 
 Future<void> showCustomBottomSheet(
@@ -67,7 +67,7 @@ Future<void> showCustomBottomSheet(
                         backgroundColor: Color.fromARGB(0, 255, 0, 0),
                         elevation: 0),
                     onPressed: () {
-                     favControllerUpdater.addtoFav(allvideosControlleerr.fullvideo[index].path);
+                     favControllerUpdater.addtoFav(fullvideo[index].path);
                     },
                     icon: Icon(
                       Icons.favorite_border,

@@ -22,6 +22,8 @@ List<String> VideoPath = [];
 // List <String> VideoDuration = [];
 List<VideoDatass> allvideos = [];
 List HPLN = [];
+ List fullvideo = [];
+
 // dynamic  datadata;
 
 class Splashscreen extends StatefulWidget {
@@ -42,10 +44,9 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
 
-      final allVideosController allVideosupdater = Get.put(allVideosController());
-  final HomeScreenController Homecontroller = Get.put(HomeScreenController());
-  final favoriteController FavoriteController = Get.put(favoriteController());
-    PlayList_Controller PlaylistUpdater = Get.put(PlayList_Controller());
+final HomeScreenController Homecontroller = Get.put(HomeScreenController());
+final favoriteController FavoriteController = Get.put(favoriteController());
+final PlayList_Controller PlaylistUpdater = Get.put(PlayList_Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +73,10 @@ class _SplashscreenState extends State<Splashscreen> {
 
   Future<void> GoToHome(BuildContext context) async {
     await Future<dynamic>.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 5),
     );
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => NavBar(),
-      ),
-    );
+   
+      Get.offAll(NavBar());
   }
 
   void searchInStorage() {
@@ -138,8 +135,8 @@ class _SplashscreenState extends State<Splashscreen> {
         Date: e.Date!)).toList();
 
     box.put('MyVideos', allvideos);
-    allvideosControlleerr.fullvideo = box.get('MyVideos')!;
-    Homecontroller.Videofolders = allvideosControlleerr.fullvideo
+    fullvideo = box.get('MyVideos')!;
+    Homecontroller.Videofolders = fullvideo
         .map((e) => e.folderName.toString())
         .toList()
         .toSet();

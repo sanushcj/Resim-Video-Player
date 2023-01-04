@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:marquee_text/marquee_text.dart';
-import 'package:resimvideoplayer/Screens/Home/folderfunction.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/navbar.dart';
 import 'package:video_player/video_player.dart';
 
@@ -74,24 +74,23 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
 
   @override
   void initState() {
-    super.initState();
     _playVideo();
     videoPlayerController.play();
     _setAllOrientation();
     StatusBarHide();
+     super.initState();
+
   }
 
   @override
   void dispose() {
-  super.dispose();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     videoPlayerController.dispose();
   _setAllOrientation();
-    _portraitMode();
+    super.dispose();
+}
+
   
-  
-  
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,9 +227,9 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                         int newindex = widget.Indexofvideo--;
                                         if (newindex >= 0) {
                                           widget.VTitle =
-                                              allvideosControlleerr.fullvideo[newindex].title;
+                                              fullvideo[newindex].title;
                                           widget.VideoFetched =
-                                              allvideosControlleerr.fullvideo[newindex].path;
+                                              fullvideo[newindex].path;
                                           _playVideo();
                                         }
                                       },
@@ -258,11 +257,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                             .value.isPlaying) {
                                           videoPlayerController.pause();
                                         }
-                                        if (newindex <= allvideosControlleerr.fullvideo.length) {
+                                        if (newindex <= fullvideo.length) {
                                           widget.VTitle =
-                                              allvideosControlleerr.fullvideo[newindex].title;
+                                              fullvideo[newindex].title;
                                           widget.VideoFetched =
-                                              allvideosControlleerr.fullvideo[newindex].path;
+                                              fullvideo[newindex].path;
                                           _playVideo();
                                         }
                                       },

@@ -33,7 +33,7 @@ class PlaylistPage extends StatelessWidget {
                         color: Color.fromARGB(255, 255, 255, 255),
                         borderRadius:
                             BorderRadius.only(topLeft: Radius.circular(30))),
-                    height: MediaQuery.of(context).size.height / 1.33,
+                    height: MediaQuery.of(context).size.height / 1.3,
                     width: MediaQuery.of(context).size.width,
                     child: ListView(
                       children: [
@@ -76,48 +76,51 @@ class PlaylistPage extends StatelessWidget {
                                 builder: (Controller) {
                               return Controller
                                       .Get_List_of_playlistNames.isNotEmpty
-                                  ? GridView.builder(
-                                      itemCount: Controller
-                                          .Get_List_of_playlistNames.length,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2),
-                                      itemBuilder: (context, index) => InkWell(
-                                        onLongPress: () {
-                                          Controller.playlistDelete(
-                                              context,
-                                              Controller
-                                                      .Get_List_of_playlistNames[
-                                                  index]);
-                                        },
-                                        onTap: () => Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (context) => InsidePlayList(
-                                              boxkey: Controller
-                                                      .Get_List_of_playlistNames[
-                                                  index]),
-                                        )),
-                                        child: Card(
-                                          color: Colors.primaries[Random()
-                                                  .nextInt(
-                                                      Colors.primaries.length)]
-                                              [300],
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Center(
-                                                  child: Text(
+                                  ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GridView.builder(
+                                        itemCount: Controller
+                                            .Get_List_of_playlistNames.length,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2),
+                                        itemBuilder: (context, index) => InkWell(
+                                          onLongPress: () {
+                                            Controller.playlistDelete(
+                                                context,
                                                 Controller
                                                         .Get_List_of_playlistNames[
-                                                    index],
-                                                style: TextStyle(fontSize: 20),
-                                              ))
-                                            ],
+                                                    index]);
+                                          },
+                                          onTap: () => Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) => InsidePlayList(
+                                                boxkey: Controller
+                                                        .Get_List_of_playlistNames[
+                                                    index]),
+                                          )),
+                                          child: Card(
+                                            color: Colors.primaries[Random()
+                                                    .nextInt(
+                                                        Colors.primaries.length)]
+                                                [300],
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                    child: Text(
+                                                  Controller
+                                                          .Get_List_of_playlistNames[
+                                                      index],
+                                                  style: TextStyle(fontSize: 20),
+                                                ))
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    )
+                                  )
                                   : Center(
                                       child: Text('Create new Playlist'),
                                     );

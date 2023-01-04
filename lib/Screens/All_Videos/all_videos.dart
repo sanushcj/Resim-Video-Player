@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/Screens/Thumbnail/thumnail.dart';
-import 'package:resimvideoplayer/controller/fullvideo_controller.dart';
 import 'package:resimvideoplayer/widgets/appbar.dart';
 import 'package:resimvideoplayer/widgets/bottomsheet.dart';
 import '../videoplaying screen/video_playing_screen.dart';
@@ -29,21 +29,20 @@ class AllVideos extends StatelessWidget {
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(30))),
                 height: MediaQuery.of(context).size.height/1.30,
-                child: GetBuilder<allVideosController>(
-                  builder: (Controller) {
-                    return ListView.separated(
+                child:
+                 ListView.separated(
                       padding: EdgeInsets.only(top: 15),
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         return ListTile(
                           onLongPress: () => showCustomBottomSheet(
-                              context, Controller.fullvideo[index].path, index),
+                              context,fullvideo[index].path, index),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => VideoPlayerPage(
-                                  VideoFetched: Controller.fullvideo[index].path.toString(),
-                                  VTitle: (Controller.fullvideo[index].title.toString()),
+                                  VideoFetched:fullvideo[index].path.toString(),
+                                  VTitle: (fullvideo[index].title.toString()),
                                   Indexofvideo: index,
                                 ),
                               ),
@@ -52,7 +51,7 @@ class AllVideos extends StatelessWidget {
                           title: Container(
                             width: double.infinity,
                             child: Text(
-                              Controller.fullvideo[index].title,
+                             fullvideo[index].title,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontSize: 17,
@@ -61,16 +60,15 @@ class AllVideos extends StatelessWidget {
                           ),
 
                           leading: Thumnailcontainer(
-                              VideoPath: Controller.fullvideo[index].path, index: index),
+                              VideoPath:fullvideo[index].path, index: index),
 
                           // thumnailsss.add() getThumbnail(fullvideo[index].path);
                         );
                       },
                       separatorBuilder: (context, index) => Divider(),
-                      itemCount: Controller.fullvideo.length,
-                    );
-                  }
-                )),
+                      itemCount: fullvideo.length,
+                    )
+               ),
           ],
         ),
       ),
