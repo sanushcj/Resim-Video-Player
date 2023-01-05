@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:marquee_text/marquee_text.dart';
-import 'package:resimvideoplayer/Screens/Splash/splash.dart';
 import 'package:resimvideoplayer/navbar.dart';
 import 'package:video_player/video_player.dart';
 
@@ -14,13 +13,15 @@ class VideoPlayerPage extends StatefulWidget {
       required this.VideoFetched,
       required this.VTitle,
       required this.Indexofvideo,
-      this.ControllerFromLandscape});
+      this.ControllerFromLandscape,
+      required this.Videopack});
 
   String VideoFetched;
   String VTitle;
   int Indexofvideo;
+  dynamic Videopack;
   var ControllerFromLandscape;
-
+  
   @override
   State<VideoPlayerPage> createState() => _VideoPlayerState();
 }
@@ -53,7 +54,8 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
       ..setLooping(true)
       ..initialize().then((value) => setState(() {}));
   }
-    StatusBarHide() async {
+
+  StatusBarHide() async {
     Duration(seconds: 4);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   }
@@ -78,24 +80,24 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
     videoPlayerController.play();
     _setAllOrientation();
     StatusBarHide();
-     super.initState();
-
+    super.initState();
   }
 
   @override
   void dispose() {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    _setAllOrientation();
     videoPlayerController.dispose();
-  _setAllOrientation();
-    super.dispose();
-}
 
-  
+    super.dispose();
+  }
+
+  int newindex = 0;
 
   @override
   Widget build(BuildContext context) {
     // int CurrentIndex = widget.Indexofvideo;
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -144,8 +146,8 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                   text: widget.VTitle,
                                 ),
                                 speed: 10,
-                                style:
-                                    TextStyle(fontSize: 20, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
                               ),
                             ),
                             SizedBox(
@@ -209,35 +211,47 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
                                       onPressed: () {},
                                       icon: Icon(
-                                        Icons.lock_outline,
-                                        color: Colors.white,
-                                        size: 30,
-                                      )),
+                                              Icons.lock_outline,
+                                              color: Colors.white,
+                                              size: 30,
+                                            )
+                                       ),
                                   IconButton(
                                       onPressed: () {
                                         if (videoPlayerController
                                             .value.isPlaying) {
                                           videoPlayerController.pause();
                                         }
-                                        int newindex = widget.Indexofvideo--;
+
+                                        if (widget.Indexofvideo != 0) {
+                                          newindex = widget.Indexofvideo--;
+                                        }
                                         if (newindex >= 0) {
                                           widget.VTitle =
-                                              fullvideo[newindex].title;
+                                              widget.Videopack[newindex].title;
                                           widget.VideoFetched =
-                                              fullvideo[newindex].path;
+                                              widget.Videopack[newindex].path;
                                           _playVideo();
                                         }
                                       },
-                                      icon: Icon(
-                                        Icons.skip_previous,
-                                        color: Colors.white,
-                                        size: 45,
-                                      )),
+                                      icon:widget.Indexofvideo >= 0
+                                          ? Icon(
+                                              Icons.skip_previous,
+                                              color: Colors.white,
+                                              size: 30,
+                                            )
+                                          : Icon(
+                                              Icons.skip_previous,
+                                              color: Color.fromARGB(
+                                                  49, 255, 255, 255),
+                                              size: 30,
+                                            ) ),
                                   IconButton(
                                       onPressed: () =>
                                           videoPlayerController.value.isPlaying
@@ -257,40 +271,52 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                                             .value.isPlaying) {
                                           videoPlayerController.pause();
                                         }
-                                        if (newindex <= fullvideo.length) {
+                                        if (widget.Indexofvideo !=
+                                            widget.Videopack.length) {
+                                          newindex = widget.Indexofvideo++;
+                                        }
+                                        if (newindex >= 0) {
                                           widget.VTitle =
-                                              fullvideo[newindex].title;
+                                              widget.Videopack[newindex].title;
                                           widget.VideoFetched =
-                                              fullvideo[newindex].path;
+                                              widget.Videopack[newindex].path;
                                           _playVideo();
                                         }
                                       },
-                                      icon: Icon(
-                                        Icons.skip_next,
-                                        color: Colors.white,
-                                        size: 45,
-                                      )),
-                                  IconButton(
-                                      onPressed: () {
-                       
-                                        MediaQuery.of(context).orientation ==
-                                                Orientation.portrait
-                                            ? _landscapeMode()
-                                            : _portraitMode();
-                                            StatusBarHide();
-                                      },
-                                      icon: MediaQuery.of(context).orientation ==
-                                              Orientation.portrait
+                                      icon: widget.Indexofvideo !=
+                                              widget.Videopack.length
                                           ? Icon(
-                                              Icons.stay_current_landscape,
+                                              Icons.skip_next,
                                               color: Colors.white,
                                               size: 30,
                                             )
                                           : Icon(
-                                              Icons.stay_current_portrait,
-                                              color: Colors.white,
+                                              Icons.skip_next,
+                                              color: Color.fromARGB(
+                                                  49, 255, 255, 255),
                                               size: 30,
                                             )),
+                                  IconButton(
+                                    onPressed: () {
+                                      MediaQuery.of(context).orientation ==
+                                              Orientation.portrait
+                                          ? _landscapeMode()
+                                          : _portraitMode();
+                                      StatusBarHide();
+                                    },
+                                    icon: MediaQuery.of(context).orientation ==
+                                            Orientation.portrait
+                                        ? Icon(
+                                            Icons.stay_current_landscape,
+                                            color: Colors.white,
+                                            size: 30,
+                                          )
+                                        : Icon(
+                                            Icons.stay_current_portrait,
+                                            color: Colors.white,
+                                            size: 30,
+                                          ),
+                                  ),
                                 ],
                               )
                             ],
@@ -299,12 +325,11 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
                       ),
                     ],
                   )
-                : Center(child: CircularProgressIndicator(color: Colors.white))),
+                : Center(
+                    child: CircularProgressIndicator(color: Colors.white))),
       ),
     );
   }
-  
- 
 }
 
 

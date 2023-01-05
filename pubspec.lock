@@ -155,20 +155,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.4"
-  dependencies:
-    dependency: "direct main"
-    description:
-      name: dependencies
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
-  disposables:
-    dependency: transitive
-    description:
-      name: disposables
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   fake_async:
     dependency: transitive
     description:
@@ -190,13 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
-  file_manager:
-    dependency: "direct main"
-    description:
-      name: file_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   file_picker:
     dependency: "direct main"
     description:
@@ -324,13 +303,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.2"
-  intl:
-    dependency: "direct main"
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -541,13 +513,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.5"
   shelf:
     dependency: transitive
     description:

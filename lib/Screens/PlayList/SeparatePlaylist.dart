@@ -93,7 +93,7 @@ class InsidePlayList extends StatelessWidget {
                                   return ListTile(
                                     onTap: () => Navigator.of(context)
                                         .push(MaterialPageRoute(
-                                      builder: (context) => VideoPlayerPage(
+                                      builder: (context) => VideoPlayerPage(Videopack: PlayListControllerUpdater.VideosinPlayList ,
                                           VideoFetched: PlayListControllerUpdater.VideosinPlayList[index],
                                           VTitle: PlayListControllerUpdater.VideosinPlayList[index]
                                               .split('/')

@@ -102,7 +102,7 @@ class MySearch extends SearchDelegate<dynamic> {
                       onTap: () async {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => VideoPlayerPage(
+                            builder: (_) => VideoPlayerPage(Videopack: searched,
                               VideoFetched: searched[index].toString(),
                               VTitle: (searched[index].split('/').last),
                               Indexofvideo: index,
@@ -183,10 +183,10 @@ class MySearch extends SearchDelegate<dynamic> {
                         print(searched);
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => VideoPlayerPage(
+                            builder: (_) => VideoPlayerPage( 
                               VideoFetched: searched[index].toString(),
                               VTitle: (searched[index].split('/').last),
-                              Indexofvideo: index,
+                              Indexofvideo: index, Videopack: searched,
                             ),
                           ),
                         );

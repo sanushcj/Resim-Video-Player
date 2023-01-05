@@ -41,7 +41,7 @@ class _FolderOpenScreenState extends State<FolderOpenScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) => ListTile(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => VideoPlayerPage(
+                      builder: (context) => VideoPlayerPage(Videopack:widget.myfoldervideos ,
                         VideoFetched:
                             (widget.myfoldervideos[index].path.toString()),
                         VTitle:

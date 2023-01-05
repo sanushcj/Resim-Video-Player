@@ -40,7 +40,7 @@ class AllVideos extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => VideoPlayerPage(
+                                builder: (_) => VideoPlayerPage(Videopack: fullvideo,
                                   VideoFetched:fullvideo[index].path.toString(),
                                   VTitle: (fullvideo[index].title.toString()),
                                   Indexofvideo: index,

@@ -39,7 +39,7 @@ class UserFav extends StatelessWidget {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (_) => VideoPlayerPage(
+                                      builder: (_) => VideoPlayerPage(Videopack:controller.FavDB ,
                                         VideoFetched: controller.FavDB[index],
                                         VTitle: (controller.FavDB[index]
                                             .split('/')

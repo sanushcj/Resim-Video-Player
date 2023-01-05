@@ -49,102 +49,104 @@ class SettingsPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 213, 204, 204),
-                  borderRadius:
-                      BorderRadius.only(topLeft: Radius.circular(30))),
-              height: MediaQuery.of(context).size.height / 1.1528,
-              width: MediaQuery.of(context).size.width,
+            Expanded(
               child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: GridView(
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 5,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 213, 204, 204),
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(30))),
+                height: MediaQuery.of(context).size.height ,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: GridView(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 5,
+                      ),
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.color_lens),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Themes'),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.dark_mode),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Dark Mode'),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.language),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Languages'),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.info),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Information'),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                Privacypolicy(context);
+                          },
+                          child: Card( 
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.privacy_tip_rounded),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Privacy Policy'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.color_lens),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Themes'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.dark_mode),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Dark Mode'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.language),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Languages'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.info),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Information'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-              Privacypolicy(context);
-                        },
-                        child: Card( 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.privacy_tip_rounded),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Privacy Policy'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
